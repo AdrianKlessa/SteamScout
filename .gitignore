@@ -5,3 +5,9 @@
 /models/fasttext_trained_v2.wv.vectors_ngrams.npy
 /models/fasttext_trained_v3
 /models/fasttext_trained_v3.wv.vectors_ngrams.npy
+/data/raw/games.json
+/data/raw/games.csv
+/data/processed/games_with_vectors.pickle
+/notebooks/game_description_db/
+/notebooks/game_tags_db/
+/notebooks/workspace_path/
