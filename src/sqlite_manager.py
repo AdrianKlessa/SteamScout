@@ -4,7 +4,7 @@ import io
 import numpy as np
 
 SQLITE_PATH = Path(__file__).resolve().parent / "databases" / "main_game_db.db"
-
+# TODO: Make the results into a custom object
 
 # https://stackoverflow.com/a/18622264 (unutbu)
 def adapt_array(arr):
@@ -28,7 +28,6 @@ sqlite3.register_adapter(np.ndarray, adapt_array)
 
 # Converts TEXT to np.array when selecting
 sqlite3.register_converter("array", convert_array)
-
 
 def get_games_by_app_id(app_id: int):
     statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE app_id = '{app_id}'"
