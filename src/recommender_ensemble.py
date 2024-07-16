@@ -22,7 +22,12 @@ class RecommendationResult:
         return self.game.fraction_positive_reviews
 
     def __repr__(self):
-        return f"Game: {self.game}, Description similarity: {self.description_similarity}, Tags similarity: {self.tags_similarity}, review_score: {self.review_score}\n Scores sum: {self.description_similarity+self.tags_similarity+self.review_score}"
+        return (f"Game: {self.game}, "
+                f"Description similarity: {self.description_similarity}, "
+                f"Tags similarity: {self.tags_similarity}, "
+                f"review_score: {self.review_score}\n "
+                f"Scores sum: {self.description_similarity+self.tags_similarity+self.review_score}\n "
+                f"Game URL: {self.game.game_link}")
 
 
 def cosine_similarity(A, B):
@@ -100,7 +105,6 @@ def get_ensemble_similar_games_by_app_id(app_id: int, no_results: int,
 
 
 if __name__ == '__main__':
-    #print(get_similar_games_by_tags(sqlite_manager.get_games_by_app_id(489830)[0], 20))
     results = get_ensemble_similar_games_by_app_id(557630, 20)
 
     print("\n".join(map(str, results)))

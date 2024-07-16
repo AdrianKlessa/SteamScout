@@ -25,3 +25,7 @@ class Game:
     @property
     def number_of_reviews(self) -> int:
         return self.positive_reviews + self.negative_reviews
+
+    @property
+    def game_link(self) -> str:
+        return f'https://store.steampowered.com/app/{self.app_id}'
