@@ -1,6 +1,14 @@
+from typing import Iterable, List
+
 from src.Game import Game
 import numpy as np
 from numpy.linalg import norm
+import vectordb_manager
+import sqlite_manager
+
+default_description_contribution = 0.5
+default_tag_contribution = 1
+default_score_contribution = 1
 
 
 class RecommendationResult:
@@ -13,6 +21,9 @@ class RecommendationResult:
     def review_score(self) -> float:
         return self.game.fraction_positive_reviews
 
+    def __repr__(self):
+        return f"Game: {self.game}, Description similarity: {self.description_similarity}, Tags similarity: {self.tags_similarity}, review_score: {self.review_score}\n Scores sum: {self.description_similarity+self.tags_similarity+self.review_score}"
+
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
@@ -21,7 +32,7 @@ def cosine_similarity(A, B):
     return (np.dot(A, B) / (norm(A) * norm(B)))
 
 
-def games_to_result(searched_game: Game, found_game: Game):
+def game_pair_to_result(searched_game: Game, found_game: Game):
     doc2vec1 = searched_game.description_vector
     doc2vec2 = found_game.description_vector
 
@@ -33,8 +44,63 @@ def games_to_result(searched_game: Game, found_game: Game):
 
     return RecommendationResult(found_game, doc2vec_score, tags_score)
 
-def get_similar_games_by_description(game: Game):
-    pass
 
-def get_similar_games_by_tags(game : Game):
-    pass
+def games_list_to_result(searched_game: Game, found_games: Iterable[Game]):
+    return [game_pair_to_result(searched_game, i) for i in found_games]
+
+
+def get_similar_games_by_description(game: Game, no_results: int) -> Iterable[Game]:
+    query_vector = game.description_vector
+    result_ids = vectordb_manager.find_similar_by_description_vector(query_vector, no_results + 1)
+    games = [sqlite_manager.get_games_by_app_id(i)[0] for i in result_ids]
+    return games
+
+
+def get_similar_games_by_tags(game: Game, no_results: int) -> Iterable[Game]:
+    query_vector = game.tags_vector
+    result_ids = vectordb_manager.find_similar_by_tags_vector(query_vector, no_results + 1)
+    games = [sqlite_manager.get_games_by_app_id(i)[0] for i in result_ids]
+    return games
+
+
+def get_ensemble_similar_games_by_game(game: Game, no_results: int,
+                                       description_contribution: float = default_description_contribution,
+                                       tags_contribution: float = default_tag_contribution,
+                                       score_contribution: float = default_score_contribution) -> List[RecommendationResult]:
+    description_similar_games = get_similar_games_by_description(game, no_results)
+    tags_similar_games = get_similar_games_by_tags(game, no_results)
+
+    recommended_games = description_similar_games
+    # Deduplicate results
+    desc_ids = [g.app_id for g in description_similar_games]
+    for i in tags_similar_games:
+        if i.app_id not in desc_ids:
+            recommended_games.append(i)
+    recommender_results = games_list_to_result(game, recommended_games)
+    recommender_results.sort(reverse=True, key=lambda x: score_result(x, description_contribution, tags_contribution, score_contribution))
+    return recommender_results
+
+
+def score_result(recommendation_result: RecommendationResult, description_contribution: float, tags_contribution: float,
+                 score_contribution: float) -> float:
+    score = 0
+    score += recommendation_result.description_similarity * description_contribution
+    score += recommendation_result.tags_similarity * tags_contribution
+    score += recommendation_result.review_score * score_contribution
+    return score
+
+
+def get_ensemble_similar_games_by_app_id(app_id: int, no_results: int,
+                                         description_contribution: float = default_description_contribution,
+                                         tags_contribution: float = default_tag_contribution,
+                                         score_contribution: float = default_score_contribution) -> List[RecommendationResult]:
+    game = sqlite_manager.get_games_by_app_id(app_id)[0]
+    return get_ensemble_similar_games_by_game(game, no_results, description_contribution, tags_contribution,
+                                              score_contribution)
+
+
+if __name__ == '__main__':
+    #print(get_similar_games_by_tags(sqlite_manager.get_games_by_app_id(489830)[0], 20))
+    results = get_ensemble_similar_games_by_app_id(557630, 20)
+
+    print("\n".join(map(str, results)))

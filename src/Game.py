@@ -1,4 +1,6 @@
 import numpy as np
+
+
 class Game:
     def __init__(self, app_id: int, game_name: str, description: str, tags: str, positive_reviews: int,
                  negative_reviews: int, description_vector: np.array, tags_vector: np.array):
@@ -12,10 +14,12 @@ class Game:
         self.tags_vector = tags_vector
 
     def __repr__(self):
-        return str(self.__dict__)
+        return self.game_name
 
     @property
     def fraction_positive_reviews(self) -> float:
+        if self.number_of_reviews == 0:
+            return 0.5
         return self.positive_reviews / (self.positive_reviews + self.negative_reviews)
 
     @property

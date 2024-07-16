@@ -37,13 +37,13 @@ def app_ids_from_results(res_object, ignore_first=True):
 def find_similar_by_description_vector(description_vector, no_results=10, ignore_first=True):
     query = GameDescriptionDoc(text='query', embedding=description_vector)
     results = description_db.search(inputs=DocList[GameDescriptionDoc]([query]), limit=no_results)
-    return app_ids_from_results(results)
+    return app_ids_from_results(results, ignore_first)
 
 
 def find_similar_by_tags_vector(tags_vector, no_results=10, ignore_first=True):
     query = GameTagDoc(text='query', embedding=tags_vector)
     results = tags_db.search(inputs=DocList[GameTagDoc]([query]), limit=no_results)
-    return app_ids_from_results(results)
+    return app_ids_from_results(results, ignore_first)
 
 
 if __name__ == '__main__':
