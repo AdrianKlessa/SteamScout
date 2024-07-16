@@ -5,6 +5,8 @@ from typing import Iterable
 
 import numpy as np
 
+from Game import Game
+
 SQLITE_PATH = Path(__file__).resolve().parent / "databases" / "main_game_db.db"
 
 
@@ -24,26 +26,6 @@ def convert_array(text):
     out.seek(0)
     return np.load(out)
 
-
-class Game:
-    # Note to self: consider using attrs if more classes like this arise
-    def __init__(self, app_id: int, game_name: str, description: str, tags: str, positive_reviews: int,
-                 negative_reviews: int, description_vector: np.array, tags_vector: np.array):
-        self.app_id = app_id
-        self.game_name = game_name
-        self.description = description
-        self.tags = tags
-        self.positive_reviews = positive_reviews
-        self.negative_reviews = negative_reviews
-        self.description_vector = description_vector
-        self.tags_vector = tags_vector
-
-    def __repr__(self):
-        return str(self.__dict__)
-
-    @property
-    def fraction_positive_reviews(self) -> float:
-        return self.positive_reviews / ((self.positive_reviews + self.negative_reviews))
 
 
 # Converts np.array to TEXT when inserting
