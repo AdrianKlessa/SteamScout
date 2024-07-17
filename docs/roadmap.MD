@@ -8,11 +8,18 @@ Planned features (implemented / unimplemented):
   - ✅ Description vector-based recommender
   - ✅ Tag vector-based recommender
   - ✅ User reviews (score) as factor
-- 🔳 Game search by name
+- ✅ Game search by name
 - 🔳 Add filtering by tags during query
 - 🔳 "Hidden gems" search by limiting to games with low review count
 - 🔳 Look for game by user-provided description
 - ✅ Configurable influence of each recommender in ensemble
-- 🔳 Frontend
-  - 🔳 Website?
+- ✅ Frontend
+  - ✅ Website?
   - 🔳 Discord bot?
+- 🔳 Frontend improvements
+  - 🔳 Text autosizing for larger screens
+  - 🔳 Get game thumbnails from Steam if possible
+  - 🔳 Second tab for description search
+  - 🔳 Better link formatting
+  - 🔳 Overall recommendation score (the one which was used to rank the game)
+  - 🔳 Less clicking (esp. Enter) to search for a single game (use button instead maybe?)
