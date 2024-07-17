@@ -49,16 +49,22 @@ def get_games_by_app_id(app_id: int) -> Iterable[Game]:
             conn.close()
 
 
-def get_games_by_name(name: str, exact=True) -> Iterable[Game]:
-    if exact:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = '{name.lower()}'"
+def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : bool = True) -> Iterable[Game]:
+    #TODO: Use prepared statement instead because quotes break queries rn
+    if popularity_sort:
+        order_parameter = "positive_reviews"
     else:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE '%{name.lower()}%'"
+        order_parameter = "app_id"
+    if exact:
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = '{name.lower()}' ORDER BY {order_parameter} DESC LIMIT {limit}"
+    else:
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE '%{name.lower()}%' ORDER BY {order_parameter} DESC LIMIT {limit} "
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
             cursor.execute(statement)
-            return results_to_game(cursor.fetchall())
+            res = cursor.fetchall()
+            return results_to_game(res)
     except sqlite3.Error as e:
         print(e)
     finally:

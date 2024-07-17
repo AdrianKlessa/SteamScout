@@ -29,6 +29,8 @@ class RecommendationResult:
                 f"Scores sum: {self.description_similarity+self.tags_similarity+self.review_score}\n "
                 f"Game URL: {self.game.game_link}")
 
+    def to_list(self):
+        return [self.game.game_name, self.description_similarity, self.tags_similarity, self.review_score]
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
