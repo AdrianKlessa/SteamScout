@@ -32,13 +32,15 @@ def find_similar_games(text):
 
 
 with gr.Blocks() as app:
-    gr.Markdown("Start typing below and then click **Run** to see the output.")
+    gr.Markdown("### Similar Games search")
+    gr.Markdown("Find a game by writing its name in the search box, then pressing enter.")
+    gr.Markdown("After choosing from one of the found games in the dropdown, click 'FIND SIMILAR'")
     with gr.Row():
         input_text = gr.Textbox(placeholder="Game name (press enter to search)",
                                 label="Game search by name (press enter to search)")
     with gr.Row():
         input_dropdown = gr.Dropdown(choices=[], interactive=True, label="Select")
-        select_button = gr.Button(label="Search")
+        select_button = gr.Button(value="FIND SIMILAR")
     output_dataframe = gr.Dataframe(label="Similar games:",
                                     value=pd.DataFrame(),
                                     datatype=["markdown", "markdown", "markdown","markdown","html"])
