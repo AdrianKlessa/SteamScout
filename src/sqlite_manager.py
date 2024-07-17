@@ -55,14 +55,18 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
         order_parameter = "positive_reviews"
     else:
         order_parameter = "app_id"
+
+    parameter = name.lower()
+    if not exact:
+        parameter = "%"+parameter+"%"
     if exact:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = '{name.lower()}' ORDER BY {order_parameter} DESC LIMIT {limit}"
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = ? ORDER BY {order_parameter} DESC LIMIT {limit}"
     else:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE '%{name.lower()}%' ORDER BY {order_parameter} DESC LIMIT {limit} "
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE ? ORDER BY {order_parameter} DESC LIMIT {limit} "
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
-            cursor.execute(statement)
+            cursor.execute(statement,[parameter])
             res = cursor.fetchall()
             return results_to_game(res)
     except sqlite3.Error as e:
@@ -82,7 +86,8 @@ def results_to_game(result_list):
 if __name__ == "__main__":
     #print(get_games_by_app_id(10)[0].fraction_positive_reviews)
     #print(get_games_by_name("Counter-Strike")[0].fraction_positive_reviews)
-    print(get_games_by_name("counter-strike"))
+    print(get_games_by_name("counter-strike", exact=False))
+    print(get_games_by_name("counter-strike", exact=True))
     print(get_games_by_app_id(10)[0])
     #print(results_to_dict(get_games_by_app_id(10)))
     #print(results_to_dict(get_games_by_app_id(10))[0]["description_vector"])
