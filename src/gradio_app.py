@@ -20,7 +20,7 @@ def game_change(text):
 
 def find_similar_games(text):
     print(f"Finding similar games for {text}")
-    game_id = sqlite_manager.get_games_by_name(text, exact=False)[0].app_id
+    game_id = sqlite_manager.get_games_by_name(text, exact=True)[0].app_id
     print(f"Game id: {game_id}")
     results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id, no_results=30)
     print("Found recommendations!")
