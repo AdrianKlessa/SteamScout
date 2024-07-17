@@ -30,7 +30,11 @@ class RecommendationResult:
                 f"Game URL: {self.game.game_link}")
 
     def to_list(self):
-        return [self.game.game_name, self.description_similarity, self.tags_similarity, self.review_score]
+        return [self.game.game_name,
+                "{:.2f}".format(self.description_similarity*100),
+                "{:.2f}".format(self.tags_similarity*100),
+                "{:.2f}".format(self.review_score*100),
+                f'<a href="{self.game.game_link}">{self.game.game_link}</a>']
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
