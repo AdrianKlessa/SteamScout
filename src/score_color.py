@@ -10,4 +10,4 @@ def get_color_for_score(score: float):
 
 if __name__ == '__main__':
     print(get_color_for_score(0.5))
-
+    print(f"rgb{get_color_for_score(0.5)};")

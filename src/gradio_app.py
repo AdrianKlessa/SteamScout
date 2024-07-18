@@ -3,6 +3,8 @@ import sqlite_manager
 import recommender_ensemble
 import pandas as pd
 
+from src.html_elements import get_elements_from_recommendation
+
 
 def game_search(text):
     found_names = [game.game_name for game in sqlite_manager.get_games_by_name(text, exact=False)]
@@ -25,7 +27,7 @@ def find_similar_games(text):
     results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id, no_results=30)
     print("Found recommendations!")
 
-    return pd.DataFrame([gamerec.to_list() for gamerec in results],
+    return pd.DataFrame([get_elements_from_recommendation(gamerec) for gamerec in results],
                         columns=["Game name", "Score","Store link", "Description score", "Tags score", "Review score"])
 
 
