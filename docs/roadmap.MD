@@ -16,6 +16,7 @@ Planned features (implemented / unimplemented):
 - ✅ Frontend
   - ✅ Website?
   - 🔳 Discord bot?
+- 🔳 Dockerfile
 - 🔳 Frontend improvements
   - 🔳 Text autosizing for larger screens
   - 🔳 Get game thumbnails from Steam if possible
