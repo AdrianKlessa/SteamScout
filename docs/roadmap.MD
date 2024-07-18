@@ -21,6 +21,6 @@ Planned features (implemented / unimplemented):
   - 🔳 Text autosizing for larger screens
   - 🔳 Get game thumbnails from Steam if possible
   - 🔳 Second tab for description search
-  - 🔳 Better link formatting
-  - 🔳 Overall recommendation score (the one which was used to rank the game)
-  - 🔳 Less clicking (esp. Enter) to search for a single game (use button instead maybe?)
+  - ✅ Better link formatting
+  - ✅ Overall recommendation score (the one which was used to rank the game)
+  - ✅ Less clicking (esp. Enter) to search for a single game (use button instead maybe?)

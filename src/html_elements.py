@@ -10,16 +10,16 @@ def get_game_name(rec: RecommendationResult) -> str:
     return rec.game.game_name
 
 def get_game_score(rec: RecommendationResult) -> str:
-    return f'<span style="background-color: rgb{str(score_color.get_color_for_score(rec.overall_score))}"> {rec.overall_score}</span>'
+    return f'<span style="color: rgb{str(score_color.get_color_for_score(rec.overall_score))}">&#9632; </span>{"{:.2f}".format(rec.overall_score*100)}'
 
 def get_game_link(rec: RecommendationResult) -> str:
-    return f'<a href="{rec.game.game_link}" style="color: #0000EE;">{rec.game.game_link}</a>'
+    return f'<a href="{rec.game.game_link}" style="color: #0000EE;" target="_blank" rel="noopener noreferrer">{rec.game.game_link}</a>'
 
 def get_description_score(rec: RecommendationResult) -> str:
-    return f'<span style="background-color: rgb{str(score_color.get_color_for_score(rec.description_similarity))}"> {rec.description_similarity}</span>'
+    return f'<span style="color: rgb{str(score_color.get_color_for_score(rec.description_similarity))}">&#9632; </span>{"{:.2f}".format(rec.description_similarity*100)}'
 
 def get_tags_score(rec: RecommendationResult) -> str:
-    return f'<span style="background-color: rgb{str(score_color.get_color_for_score(rec.tags_similarity))}"> {rec.tags_similarity}</span>'
+    return f'<span style="color: rgb{str(score_color.get_color_for_score(rec.tags_similarity))}">&#9632; </span>{"{:.2f}".format(rec.tags_similarity*100)}'
 
 def get_review_score(rec: RecommendationResult) -> str:
-    return f'<span style="background-color: rgb{str(score_color.get_color_for_score(rec.review_score))}"> {rec.review_score}</span>'
+    return f'<span style="color: rgb{str(score_color.get_color_for_score(rec.review_score))}">&#9632; </span>{"{:.2f}".format(rec.review_score*100)}'
