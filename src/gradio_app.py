@@ -26,7 +26,7 @@ def find_similar_games(text):
     print("Found recommendations!")
 
     return pd.DataFrame([gamerec.to_list() for gamerec in results],
-                        columns=["Game name", "Description score", "Tags score", "Review score", "Store link"])
+                        columns=["Game name", "Score","Store link", "Description score", "Tags score", "Review score"])
 
 
 with gr.Blocks() as app:
@@ -46,7 +46,7 @@ with gr.Blocks() as app:
 
     output_dataframe = gr.Dataframe(label="Similar games:",
                                     value=pd.DataFrame(),
-                                    datatype=["markdown", "markdown", "markdown", "markdown", "html"])
+                                    datatype=["markdown", "markdown","html","markdown", "markdown", "markdown"])
 
     search_button.click(fn=game_change, inputs=[input_text], outputs=[input_dropdown])
     input_text.submit(fn=game_change, inputs=[input_text], outputs=[input_dropdown])

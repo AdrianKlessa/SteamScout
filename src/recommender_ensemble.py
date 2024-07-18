@@ -12,10 +12,11 @@ default_score_contribution = 1
 
 
 class RecommendationResult:
-    def __init__(self, game: Game, description_similarity: float, tags_similarity: float):
+    def __init__(self, game: Game, description_similarity: float, tags_similarity: float, overall_score : float = 0):
         self.game = game
         self.description_similarity = description_similarity
         self.tags_similarity = tags_similarity
+        self.overall_score = overall_score
 
     @property
     def review_score(self) -> float:
@@ -23,18 +24,21 @@ class RecommendationResult:
 
     def __repr__(self):
         return (f"Game: {self.game}, "
+                f"Overall score: {self.overall_score}"
+                f"Game URL: {self.game.game_link}"
                 f"Description similarity: {self.description_similarity}, "
                 f"Tags similarity: {self.tags_similarity}, "
                 f"review_score: {self.review_score}\n "
-                f"Scores sum: {self.description_similarity+self.tags_similarity+self.review_score}\n "
-                f"Game URL: {self.game.game_link}")
+                )
 
     def to_list(self):
         return [self.game.game_name,
+                "{:.2f}".format(self.overall_score * 100),
+                f'<a href="{self.game.game_link}">{self.game.game_link}</a>',
                 "{:.2f}".format(self.description_similarity*100),
                 "{:.2f}".format(self.tags_similarity*100),
-                "{:.2f}".format(self.review_score*100),
-                f'<a href="{self.game.game_link}">{self.game.game_link}</a>']
+                "{:.2f}".format(self.review_score*100)
+                ]
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
@@ -98,6 +102,7 @@ def score_result(recommendation_result: RecommendationResult, description_contri
     score += recommendation_result.description_similarity * description_contribution
     score += recommendation_result.tags_similarity * tags_contribution
     score += recommendation_result.review_score * score_contribution
+    recommendation_result.overall_score = score/(description_contribution+tags_contribution+score_contribution)
     return score
 
 
