@@ -41,7 +41,7 @@ def get_games_by_app_id(app_id: int) -> Iterable[Game]:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
             cursor.execute(statement)
-            return results_to_game(cursor.fetchall())
+            return results_to_games(cursor.fetchall())
     except sqlite3.Error as e:
         print(e)
     finally:
@@ -50,7 +50,6 @@ def get_games_by_app_id(app_id: int) -> Iterable[Game]:
 
 
 def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : bool = True) -> Iterable[Game]:
-    #TODO: Use prepared statement instead because quotes break queries rn
     if popularity_sort:
         order_parameter = "positive_reviews"
     else:
@@ -68,7 +67,7 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
             cursor = conn.cursor()
             cursor.execute(statement,[parameter])
             res = cursor.fetchall()
-            return results_to_game(res)
+            return results_to_games(res)
     except sqlite3.Error as e:
         print(e)
     finally:
@@ -76,7 +75,7 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
             conn.close()
 
 
-def results_to_game(result_list):
+def results_to_games(result_list):
     results = []
     for i in result_list:
         results.append(Game(*i))
