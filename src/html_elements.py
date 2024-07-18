@@ -7,7 +7,7 @@ def get_elements_from_recommendation(rec: RecommendationResult) -> Iterable[Any]
     return [i(rec) for i in (get_game_name, get_game_score, get_game_link, get_description_score, get_tags_score, get_review_score)]
 
 def get_game_name(rec: RecommendationResult) -> str:
-    return rec.game.game_name
+    return f'<b>{rec.game.game_name}</b>'
 
 def get_game_score(rec: RecommendationResult) -> str:
     return f'<span style="color: rgb{str(score_color.get_color_for_score(rec.overall_score))}">&#9632; </span>{"{:.2f}".format(rec.overall_score*100)}'
