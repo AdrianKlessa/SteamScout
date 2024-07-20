@@ -7,7 +7,7 @@ from src.html_elements import get_elements_from_recommendation
 
 
 def game_search(text):
-    found_names = [game.game_name for game in sqlite_manager.get_games_by_name(text, exact=False)]
+    found_names = [game.game_name for game in sqlite_manager.get_games_fts(text, 20)]
     exact_find = sqlite_manager.get_games_by_name(text, exact=True)
     if len(exact_find)>0 and exact_find[0].game_name not in found_names:
         found_names.insert(0, exact_find[0].game_name)

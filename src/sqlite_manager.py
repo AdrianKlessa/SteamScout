@@ -5,7 +5,7 @@ from typing import Iterable
 
 import numpy as np
 
-from Game import Game
+from src.Game import Game
 
 SQLITE_PATH = Path(__file__).resolve().parent / "databases" / "main_game_db.db"
 
@@ -36,11 +36,11 @@ sqlite3.register_converter("array", convert_array)
 
 
 def get_games_by_app_id(app_id: int) -> Iterable[Game]:
-    statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE app_id = '{app_id}'"
+    statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE app_id = ?"
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
-            cursor.execute(statement)
+            cursor.execute(statement, [app_id])
             return results_to_games(cursor.fetchall())
     except sqlite3.Error as e:
         print(e)
@@ -74,6 +74,21 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
         if conn:
             conn.close()
 
+def get_games_fts(name: str, limit: int = 5) -> Iterable[Game]:
+    parameter = name.lower()
+    statement = f"SELECT t1.app_id, t1.game_name, t1.description, t1.tags, t1.positive_reviews, t1.negative_reviews, t1.description_vector, t1.tags_vector FROM games t1 INNER JOIN game_titles_fts t2 ON t1.app_id = t2.app_id WHERE game_titles_fts MATCH ? ORDER BY bm25(game_titles_fts) ASC LIMIT {limit}"
+    try:
+        with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
+            cursor = conn.cursor()
+            cursor.execute(statement,[parameter])
+            res = cursor.fetchall()
+            print(res)
+            return results_to_games(res)
+    except sqlite3.Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
 
 def results_to_games(result_list):
     results = []
@@ -85,9 +100,10 @@ def results_to_games(result_list):
 if __name__ == "__main__":
     #print(get_games_by_app_id(10)[0].fraction_positive_reviews)
     #print(get_games_by_name("Counter-Strike")[0].fraction_positive_reviews)
-    print(get_games_by_name("counter-strike", exact=False))
     print(get_games_by_name("counter-strike", exact=True))
+    print(get_games_by_name("counter-strike", exact=False))
     print(get_games_by_app_id(10)[0])
+    print(get_games_fts("portal"))
     #print(results_to_dict(get_games_by_app_id(10)))
     #print(results_to_dict(get_games_by_app_id(10))[0]["description_vector"])
     #print(get_games_by_name("Counter-Strike", exact=False))
