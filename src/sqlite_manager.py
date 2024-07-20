@@ -1,7 +1,7 @@
 from pathlib import Path
 import sqlite3
 import io
-from typing import Iterable
+from typing import Iterable, List
 
 import numpy as np
 
@@ -74,7 +74,7 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
         if conn:
             conn.close()
 
-def get_games_fts(name: str, limit: int = 5) -> Iterable[Game]:
+def get_games_fts(name: str, limit: int = 5) -> List[Game]:
     parameter = name.lower()
     statement = f"SELECT t1.app_id, t1.game_name, t1.description, t1.tags, t1.positive_reviews, t1.negative_reviews, t1.description_vector, t1.tags_vector FROM games t1 INNER JOIN game_titles_fts t2 ON t1.app_id = t2.app_id WHERE game_titles_fts MATCH ? ORDER BY bm25(game_titles_fts) ASC LIMIT {limit}"
     try:
