@@ -113,9 +113,3 @@ def get_ensemble_similar_games_by_app_id(app_id: int, no_results: int,
     game = sqlite_manager.get_games_by_app_id(app_id)[0]
     return get_ensemble_similar_games_by_game(game, no_results, description_contribution, tags_contribution,
                                               score_contribution)
-
-
-if __name__ == '__main__':
-    results = get_ensemble_similar_games_by_app_id(557630, 20)
-
-    print("\n".join(map(str, results)))

@@ -82,7 +82,6 @@ def get_games_fts(name: str, limit: int = 5) -> Iterable[Game]:
             cursor = conn.cursor()
             cursor.execute(statement,[parameter])
             res = cursor.fetchall()
-            print(res)
             return results_to_games(res)
     except sqlite3.Error as e:
         print(e)
@@ -95,15 +94,3 @@ def results_to_games(result_list):
     for i in result_list:
         results.append(Game(*i))
     return results
-
-
-if __name__ == "__main__":
-    #print(get_games_by_app_id(10)[0].fraction_positive_reviews)
-    #print(get_games_by_name("Counter-Strike")[0].fraction_positive_reviews)
-    print(get_games_by_name("counter-strike", exact=True))
-    print(get_games_by_name("counter-strike", exact=False))
-    print(get_games_by_app_id(10)[0])
-    print(get_games_fts("portal"))
-    #print(results_to_dict(get_games_by_app_id(10)))
-    #print(results_to_dict(get_games_by_app_id(10))[0]["description_vector"])
-    #print(get_games_by_name("Counter-Strike", exact=False))

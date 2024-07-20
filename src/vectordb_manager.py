@@ -46,11 +46,3 @@ def find_similar_by_tags_vector(tags_vector, no_results=10, ignore_first=True):
     query = GameTagDoc(text='query', embedding=tags_vector)
     results = tags_db.search(inputs=DocList[GameTagDoc]([query]), limit=no_results)
     return app_ids_from_results(results, ignore_first)
-
-
-if __name__ == '__main__':
-    cs_go_tags_vector = sqlite_manager.get_games_by_app_id(730)[0].tags_vector
-    res = find_similar_by_tags_vector(cs_go_tags_vector, 2)
-    for i in res:
-
-        print(sqlite_manager.get_games_by_app_id(i)[0].game_name)
