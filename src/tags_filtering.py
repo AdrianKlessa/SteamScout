@@ -1,5 +1,5 @@
 from typing import Iterable
-from Game import Game
+from src.Game import Game
 
 
 def str_tags_to_set(tags: str) -> Iterable[str]:
