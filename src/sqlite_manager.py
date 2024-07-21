@@ -48,6 +48,19 @@ def get_games_by_app_id(app_id: int) -> Iterable[Game]:
         if conn:
             conn.close()
 
+def get_games_by_app_ids(app_ids: Iterable[int]) -> Iterable[Game]:
+    parameter_list = list(app_ids)
+    statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE app_id IN (%s)"%",".join('?'*len(parameter_list))
+    try:
+        with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
+            cursor = conn.cursor()
+            cursor.execute(statement, parameter_list)
+            return results_to_games(cursor.fetchall())
+    except sqlite3.Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
 
 def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : bool = True) -> Iterable[Game]:
     if popularity_sort:

@@ -30,4 +30,4 @@ def vectorize_query(query: str) -> np.ndarray:
 def get_results(query: str) -> Iterable[Game]:
     query_vector = vectorize_query(query)
     result_ids = vectordb_manager.find_similar_by_description_vector(query_vector, 10, False)
-    return [sqlite_manager.get_games_by_app_id(game_id)[0] for game_id in result_ids]
+    return sqlite_manager.get_games_by_app_ids(result_ids)

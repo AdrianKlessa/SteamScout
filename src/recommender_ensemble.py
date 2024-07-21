@@ -67,14 +67,14 @@ def games_list_to_result(searched_game: Game, found_games: Iterable[Game]):
 def get_similar_games_by_description(game: Game, no_results: int) -> Iterable[Game]:
     query_vector = game.description_vector
     result_ids = vectordb_manager.find_similar_by_description_vector(query_vector, no_results + 1)
-    games = [sqlite_manager.get_games_by_app_id(i)[0] for i in result_ids]
+    games = sqlite_manager.get_games_by_app_ids(result_ids)
     return games
 
 
 def get_similar_games_by_tags(game: Game, no_results: int) -> Iterable[Game]:
     query_vector = game.tags_vector
     result_ids = vectordb_manager.find_similar_by_tags_vector(query_vector, no_results + 1)
-    games = [sqlite_manager.get_games_by_app_id(i)[0] for i in result_ids]
+    games = sqlite_manager.get_games_by_app_ids(result_ids)
     return games
 
 
