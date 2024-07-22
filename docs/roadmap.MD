@@ -24,6 +24,7 @@ Planned features (implemented / unimplemented):
 
 To fix:
 
+- Remove `games_with_vectors.pickle` and `games.csv` when they're no longer needed when building the docker image.
 
 
 Notes:
