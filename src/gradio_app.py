@@ -3,7 +3,7 @@ import sqlite_manager
 import recommender_ensemble
 import pandas as pd
 
-from src.html_elements import get_elements_from_recommendation
+from html_elements import get_elements_from_recommendation
 
 
 def game_search(text):

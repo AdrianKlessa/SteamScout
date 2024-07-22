@@ -1,8 +1,9 @@
-from src.sqlite_manager import SQLITE_PATH
-from pathlib import Path
 import sqlite3
 import io
 import numpy as np
+from pathlib import Path
+
+SQLITE_PATH = Path(__file__).resolve().parents[1] / "databases" / "main_game_db.db"
 
 create_virtual_table_statement = """
 CREATE VIRTUAL TABLE game_titles_fts

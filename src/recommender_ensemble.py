@@ -1,6 +1,6 @@
 from typing import Iterable, List
 
-from src.Game import Game
+from Game import Game
 import numpy as np
 from numpy.linalg import norm
 import vectordb_manager

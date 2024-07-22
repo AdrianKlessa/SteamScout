@@ -1,13 +1,12 @@
 from pathlib import Path
-import src.vectordb_manager
 from docarray import BaseDoc
 from docarray.typing import NdArray
 from docarray import DocList
 from vectordb import HNSWVectorDB
 import pandas as pd
 
-DESCRIPTION_DB_DIR = src.vectordb_manager.DESCRIPTION_DB_DIR
-TAG_DB_DIR = src.vectordb_manager.TAG_DB_DIR
+DESCRIPTION_DB_DIR = Path(__file__).resolve().parents[1] / "databases" / "game_description_db"
+TAG_DB_DIR = Path(__file__).resolve().parents[1] / "databases" / "game_tag_db"
 
 PICKLE_DIR = Path(__file__).resolve().parents[2] / "data" / "processed" / "games_with_vectors.pickle"
 

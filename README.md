@@ -17,4 +17,23 @@ The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) fo
 
 [Gradio](https://github.com/gradio-app/gradio) is used to generate a frontend for the system.
 
+### Build & installation (Docker)
+
+1. Clone this repository
+2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.csv` inside `data/raw`
+3. Run `docker_build.bat` (or type `docker build -t steam-scout .` in the terminal)
+4. Run `docker_run.bat` (or type `docker run -p 7860:7860 steam-scout` in the terminal)
+
+Building the app will take a while (possibly 15+ minutes) since it's preprocessing the dataset and training doc2vec on it.
+
+*(I did not want to include a pretrained model or the data as part of this repository)*
+
+Running the app after it has been built uses the generated model and DBs so it should be much faster.
+
+Due to heavy reliance on a local database, the app greatly benefits from using an SSD. Full Text Search and indexing on queried columns is used to reduce search delays.
+
+By default, the frontend is available at `http://localhost:7860`. The port can be changed in the Dockerfile (make sure to map the port when starting up the container as well)
+
+---
+
 *Utilizes the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) published on Kaggle by Martin Bustos Roman, originally generated with [Steam Games Scraper](https://github.com/FronkonGames/Steam-Games-Scraper) by Martin Bustos.*

@@ -5,7 +5,7 @@ from typing import Iterable, List
 
 import numpy as np
 
-from src.Game import Game
+from Game import Game
 
 SQLITE_PATH = Path(__file__).resolve().parent / "databases" / "main_game_db.db"
 

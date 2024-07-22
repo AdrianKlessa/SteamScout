@@ -3,7 +3,6 @@ from docarray import DocList
 from vectordb import HNSWVectorDB
 from docarray import BaseDoc
 from docarray.typing import NdArray
-import sqlite_manager
 
 
 class GameDescriptionDoc(BaseDoc):

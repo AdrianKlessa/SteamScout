@@ -1,6 +1,6 @@
 from typing import Iterable, Any
 import score_color
-from src.recommender_ensemble import RecommendationResult
+from recommender_ensemble import RecommendationResult
 
 
 def get_elements_from_recommendation(rec: RecommendationResult) -> Iterable[Any]:

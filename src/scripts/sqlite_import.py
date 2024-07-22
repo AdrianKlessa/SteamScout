@@ -1,11 +1,10 @@
-import src.sqlite_manager
 import pandas as pd
 from pathlib import Path
 import sqlite3
 import io
 import numpy as np
 
-SQLITE_PATH = src.sqlite_manager.SQLITE_PATH
+SQLITE_PATH = Path(__file__).resolve().parents[1] / "databases" / "main_game_db.db"
 PICKLE_DIR = Path(__file__).resolve().parents[2] / "data" / "processed" / "games_with_vectors.pickle"
 """
 Import data from the "games_with_vectors" pickled pandas dataframe.
