@@ -26,7 +26,10 @@ def convert_array(text):
     out.seek(0)
     return np.load(out)
 
-
+def fts_prepare(input_string : str)->str:
+    prepared = input_string.replace('"','""')
+    prepared = '"'+prepared+'"'
+    return prepared
 
 # Converts np.array to TEXT when inserting
 sqlite3.register_adapter(np.ndarray, adapt_array)
@@ -89,6 +92,7 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
 
 def get_games_fts(name: str, limit: int = 5) -> List[Game]:
     parameter = name.lower()
+    parameter = fts_prepare(parameter)
     statement = f"SELECT t1.app_id, t1.game_name, t1.description, t1.tags, t1.positive_reviews, t1.negative_reviews, t1.description_vector, t1.tags_vector FROM games t1 INNER JOIN game_titles_fts t2 ON t1.app_id = t2.app_id WHERE game_titles_fts MATCH ? ORDER BY bm25(game_titles_fts) ASC LIMIT {limit}"
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
