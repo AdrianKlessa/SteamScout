@@ -20,6 +20,7 @@ Planned features (implemented / unimplemented):
   - ✅ Better link formatting
   - ✅ Overall recommendation score (the one which was used to rank the game)
   - ✅ Less clicking (esp. Enter) to search for a single game (use button instead maybe?)
+- 🔳 Architecture diagram to add to docs
 
 To fix:
 
