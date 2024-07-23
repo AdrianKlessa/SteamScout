@@ -9,7 +9,7 @@ def get_elements_from_recommendation(rec: RecommendationResult) -> Iterable[Any]
 
 
 def get_summary(rec: RecommendationResult) -> str:
-    return f'<b>{rec.game.game_name}</b><br>Tags: {get_tags_string(rec)}'
+    return f'<b>{get_game_name(rec)}</b><br>Tags: <br>{get_tags_string(rec)}'
 
 
 def get_game_score(rec: RecommendationResult) -> str:
@@ -17,7 +17,7 @@ def get_game_score(rec: RecommendationResult) -> str:
 
 
 def get_game_link(rec: RecommendationResult) -> str:
-    return f'<a href="{rec.game.game_link}" style="color: #0000EE;" target="_blank" rel="noopener noreferrer">{rec.game.game_link}</a>'
+    return f'<a href="{rec.game.game_link}" style="color: #0000EE;" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; padding:25px">{rec.game.game_link}</span></a>'
 
 
 def get_description_score(rec: RecommendationResult) -> str:
@@ -34,7 +34,16 @@ def get_review_score(rec: RecommendationResult) -> str:
 
 def get_tags_string(rec: RecommendationResult) -> str:
     tags = rec.game.tags.split(",")
-    tags_string = ", ".join(tags[:5])
-    if tags_string.lower().strip() == "nan":
+    #tags_string = "<br>* ".join(tags[:5])
+    tags_string = "".join(["<li>"+tag+"</li>" for tag in tags[:5]])
+    tags_string = "<br><ul>" + tags_string + "</ul>"
+    if rec.game.tags.lower().strip() == "nan":
         return "N/A"
     return tags_string
+
+
+def get_game_name(rec: RecommendationResult) -> str:
+    name = rec.game.game_name
+    if len(name) > 50:
+        return name[:50] + "(...)"
+    return name
