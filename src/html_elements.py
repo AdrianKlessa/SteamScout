@@ -5,7 +5,7 @@ from recommender_ensemble import RecommendationResult
 
 def get_elements_from_recommendation(rec: RecommendationResult) -> Iterable[Any]:
     return [i(rec) for i in
-            (get_summary, get_game_score, get_game_link, get_description_score, get_tags_score, get_review_score)]
+            (get_summary, get_game_score, get_review_score, get_game_link, get_description_score, get_tags_score)]
 
 
 def get_summary(rec: RecommendationResult) -> str:
@@ -17,7 +17,7 @@ def get_game_score(rec: RecommendationResult) -> str:
 
 
 def get_game_link(rec: RecommendationResult) -> str:
-    return f'<a href="{rec.game.game_link}" style="color: #0000EE;" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; padding:25px">{rec.game.game_link}</span></a>'
+    return f'<a href="{rec.game.game_link}" style="color: #0000EE;" target="_blank" rel="noopener noreferrer"><span style="display:inline-block; padding:25px">[Go to Steam page]</span></a>'
 
 
 def get_description_score(rec: RecommendationResult) -> str:

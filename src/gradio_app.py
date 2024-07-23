@@ -30,7 +30,7 @@ def find_similar_games(text, exclude_tag, include_tag, adult_content_filter, max
     results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id, no_results=30)
     results = filter_results(results, exclude_tag, include_tag, adult_content_filter, max_reviews)
     return pd.DataFrame([get_elements_from_recommendation(gamerec) for gamerec in results],
-                        columns=["Game name", "Score", "Store link", "Description score", "Tags score", "Review score"])
+                        columns=["Game name", "Similarity", "Review score", "Store link", "Description match", "Tags match"])
 
 
 def filter_results(results: Iterable[RecommendationResult], exclude_tag, include_tag, adult_content_filter,
