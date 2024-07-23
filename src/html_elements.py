@@ -34,7 +34,6 @@ def get_review_score(rec: RecommendationResult) -> str:
 
 def get_tags_string(rec: RecommendationResult) -> str:
     tags = rec.game.tags.split(",")
-    #tags_string = "<br>* ".join(tags[:5])
     tags_string = "".join(["<li>"+tag+"</li>" for tag in tags[:5]])
     tags_string = "<br><ul>" + tags_string + "</ul>"
     if rec.game.tags.lower().strip() == "nan":

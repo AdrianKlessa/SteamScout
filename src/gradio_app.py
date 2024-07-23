@@ -28,10 +28,6 @@ def game_change(text):
 def find_similar_games(text, exclude_tag, include_tag, adult_content_filter, max_reviews):
     game_id = sqlite_manager.get_games_by_name(text, exact=True)[0].app_id
     results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id, no_results=30)
-    print(f"exclude tag: {exclude_tag}")
-    print(f"include tag: {include_tag}")
-    print(f"adult content filter: {adult_content_filter}")
-    print(f"max reviews: {max_reviews}")
     results = filter_results(results, exclude_tag, include_tag, adult_content_filter, max_reviews)
     return pd.DataFrame([get_elements_from_recommendation(gamerec) for gamerec in results],
                         columns=["Game name", "Score", "Store link", "Description score", "Tags score", "Review score"])
