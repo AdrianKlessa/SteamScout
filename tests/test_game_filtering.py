@@ -1,4 +1,4 @@
-from src import tags_filtering
+from src import game_filtering
 from src.Game import Game
 import unittest
 
@@ -32,14 +32,14 @@ class TestTagsFiltering(unittest.TestCase):
 
     def test_include_tags(self):
         games = [self.game1, self.game2, self.game3]
-        filtered = tags_filtering.include_tag(games, "World War")
+        filtered = game_filtering.include_tag(games, "World War")
         self.assertNotIn(self.game1, filtered)
         self.assertIn(self.game2, filtered)
         self.assertIn(self.game3, filtered)
 
     def test_exclude_tags(self):
         games = [self.game1, self.game2, self.game3]
-        filtered = tags_filtering.exclude_tag(games, "FPS")
+        filtered = game_filtering.exclude_tag(games, "FPS")
         self.assertIn(self.game1, filtered)
         self.assertNotIn(self.game2, filtered)
         self.assertNotIn(self.game3, filtered)
