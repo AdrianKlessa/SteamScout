@@ -9,13 +9,6 @@ import game_filtering
 from html_elements import get_elements_from_recommendation
 
 
-def show_hide_advanced():
-    exclude_tag_input.visible = not exclude_tag_input.visible
-    include_tag_input.visible = not include_tag_input.visible
-    adult_content_filter_checkbox.visible = not adult_content_filter_checkbox.visible
-    max_reviews_input.visible = not max_reviews_input.visible
-
-
 def game_search(text):
     found_names = [game.game_name for game in sqlite_manager.get_games_fts(text, 20)]
     exact_find = sqlite_manager.get_games_by_name(text, exact=True)
@@ -72,7 +65,6 @@ with gr.Blocks() as app:
     with gr.Row():
         input_dropdown = gr.Dropdown(choices=[], interactive=True, label="Select")
         select_button = gr.Button(value="FIND SIMILAR")
-        #advanced_settings_button = gr.Button(value="Advanced")
 
     gr.Markdown("#### Additional filters")
     with gr.Row():
@@ -97,6 +89,5 @@ with gr.Blocks() as app:
     select_button.click(fn=find_similar_games,
                         inputs=[input_dropdown, exclude_tag_input, include_tag_input, adult_content_filter_checkbox,
                                 max_reviews_input], outputs=[output_dataframe])
-    #advanced_settings_button.click(fn=show_hide_advanced, inputs=[], outputs=[])
 
 app.launch()
