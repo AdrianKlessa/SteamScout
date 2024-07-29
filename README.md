@@ -36,7 +36,7 @@ By default, the frontend is available at `http://localhost:7860`. The port can b
 
 ### Unit tests
 
-There aren't many, but unit tests can be  run from the `src` directory through `python -m unittest discover ../tests`
+Unit tests can be executed from the `src` directory by running `python -m unittest discover ../tests`
 
 ---
 
