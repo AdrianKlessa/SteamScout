@@ -75,13 +75,13 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
     if not exact:
         parameter = "%"+parameter+"%"
     if exact:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = ? ORDER BY {order_parameter} DESC LIMIT {limit}"
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) = ? ORDER BY ? DESC LIMIT ?"
     else:
-        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE ? ORDER BY {order_parameter} DESC LIMIT {limit} "
+        statement = f"SELECT app_id,game_name,description,tags,positive_reviews,negative_reviews,description_vector,tags_vector FROM games WHERE LOWER(game_name) LIKE ? ORDER BY ? DESC LIMIT ?"
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
-            cursor.execute(statement,[parameter])
+            cursor.execute(statement,[parameter, order_parameter, limit])
             res = cursor.fetchall()
             return results_to_games(res)
     except sqlite3.Error as e:
@@ -93,11 +93,11 @@ def get_games_by_name(name: str, exact=True, limit : int = 5, popularity_sort : 
 def get_games_fts(name: str, limit: int = 5) -> List[Game]:
     parameter = name.lower()
     parameter = fts_prepare(parameter)
-    statement = f"SELECT t1.app_id, t1.game_name, t1.description, t1.tags, t1.positive_reviews, t1.negative_reviews, t1.description_vector, t1.tags_vector FROM games t1 INNER JOIN game_titles_fts t2 ON t1.app_id = t2.app_id WHERE game_titles_fts MATCH ? ORDER BY bm25(game_titles_fts) ASC LIMIT {limit}"
+    statement = f"SELECT t1.app_id, t1.game_name, t1.description, t1.tags, t1.positive_reviews, t1.negative_reviews, t1.description_vector, t1.tags_vector FROM games t1 INNER JOIN game_titles_fts t2 ON t1.app_id = t2.app_id WHERE game_titles_fts MATCH ? ORDER BY bm25(game_titles_fts) ASC LIMIT ?"
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
-            cursor.execute(statement,[parameter])
+            cursor.execute(statement,[parameter, limit])
             res = cursor.fetchall()
             return results_to_games(res)
     except sqlite3.Error as e:
