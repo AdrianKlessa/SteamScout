@@ -34,6 +34,10 @@ Due to heavy reliance on a local database, the app greatly benefits from using a
 
 By default, the frontend is available at `http://localhost:7860`. The port can be changed in the Dockerfile (make sure to map the port when starting up the container as well)
 
+### Unit tests
+
+Unit tests are run from the `src` directory through `python -m unittest discover ../tests`
+
 ---
 
 *Utilizes the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) published on Kaggle by Martin Bustos Roman, originally generated with [Steam Games Scraper](https://github.com/FronkonGames/Steam-Games-Scraper) by Martin Bustos.*

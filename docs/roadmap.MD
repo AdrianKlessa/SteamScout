@@ -15,7 +15,6 @@ Planned features (implemented / unimplemented):
 - ✅ Configurable influence of each recommender in ensemble
 - ✅ Frontend
   - ✅ Website?
-  - 🔳 Discord bot?
 - ✅ Dockerfile
 - ✅ Frontend improvements
   - ✅ Better link formatting
