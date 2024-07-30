@@ -1,5 +1,5 @@
 import unittest
-from src.score_color import get_color_for_score
+from score_color import get_color_for_score
 
 
 class TestScoreColor(unittest.TestCase):

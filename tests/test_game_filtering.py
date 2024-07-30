@@ -1,6 +1,6 @@
-from src.game_filtering import include_tag, exclude_tag
-from src.Game import Game
-from src.recommender_ensemble import RecommendationResult
+from game_filtering import include_tag, exclude_tag
+from Game import Game
+from recommender_ensemble import RecommendationResult
 import unittest
 
 

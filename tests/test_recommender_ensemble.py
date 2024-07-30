@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from src.Game import Game
+from Game import Game
 import numpy as np
 
 """
