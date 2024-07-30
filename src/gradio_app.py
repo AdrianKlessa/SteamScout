@@ -8,6 +8,8 @@ import pandas as pd
 import game_filtering
 from html_elements import get_elements_from_recommendation
 
+requested_recommender_results = 30
+
 
 def game_search(text):
     found_names = [game.game_name for game in sqlite_manager.get_games_fts(text, 20)]
@@ -27,10 +29,17 @@ def game_change(text):
 
 def find_similar_games(text, exclude_tag, include_tag, adult_content_filter, max_reviews):
     game_id = sqlite_manager.get_games_by_name(text, exact=True)[0].app_id
-    results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id, no_results=30)
-    results = filter_results(results, exclude_tag, include_tag, adult_content_filter, max_reviews)
+    for i in range(1, 4):
+        # Try 3 times to get more results if filtering out a lot of results
+        # Room for optimization here as queries / calculations are repeated
+        results = recommender_ensemble.get_ensemble_similar_games_by_app_id(app_id=game_id,
+                                                                            no_results=i * requested_recommender_results)
+        results = filter_results(results, exclude_tag, include_tag, adult_content_filter, max_reviews)
+        if len(results) >= requested_recommender_results:
+            break
     return pd.DataFrame([get_elements_from_recommendation(gamerec) for gamerec in results],
-                        columns=["Game name", "Similarity", "Review score", "Store link", "Description match", "Tags match"])
+                        columns=["Game name", "Similarity", "Review score", "Store link", "Description match",
+                                 "Tags match"])
 
 
 def filter_results(results: Iterable[RecommendationResult], exclude_tag, include_tag, adult_content_filter,
