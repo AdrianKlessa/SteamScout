@@ -11,7 +11,7 @@ Planned features (implemented / unimplemented):
 - ✅ Game search by name
 - ✅ Add filtering by tags during query
 - ✅ "Hidden gems" search by limiting to games with low review count
-- 🔳 Increases number of search results when using filters
+- ✅ Increases number of search results when using filters
 - ✅ Configurable influence of each recommender in ensemble
 - ✅ Frontend
   - ✅ Website?
