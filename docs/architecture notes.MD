@@ -1,4 +1,4 @@
-When building the dockerfile, data from the games dataset is processed as follows:
+Data from the games dataset is processed as follows:
 
 * Game descriptions are normalized by removing punctuation and transforming to lowercase. Gensim's `simple preprocess` function is used, after which a doc2vec model is trained on these texts (fit & transform). This creates the game description vectors
 * Game tags are changed to binary vectors (e.g. [0,0,0,1,1,0,1,...]) where, according to a dictionary json file, each index corresponds to one of the tags that the game either has or doesn't have
@@ -31,3 +31,5 @@ Default weights are as follows:
 Increasing the description score's contribution increases the rating of results that are only superficially similar based on their themes (or the wording used). The default level makes the system reward additional similarity between items that cannot be expressed by the limited number of tags available in the data and makes it pick up some results that lack any tags, but are nevertheless related to the query. 
 
 Gradio was used to simplify the creation of a web frontend for the recommendation system.
+
+A multistage docker build process is used to get rid of unprocessed and intermediate data files that are not needed to run a container once they have been added to the databases.
