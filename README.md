@@ -2,6 +2,8 @@
 
 ***Find similar games to the ones you like - even if the genres you like are not very popular***
 
+![image](docs/screenshot_light.PNG)
+
 The system is a weighted ensemble recommender composed of:
 - A recommender rating the games based on the similarity of their vectorized descriptions ("About this game" section)
 - A recommender rating the similarity of games based on their tags
