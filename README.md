@@ -34,7 +34,7 @@ Running the app after it has been built uses the generated model and DBs so it s
 
 Due to heavy reliance on a local database, the app greatly benefits from using an SSD. Full Text Search and indexing on queried columns is used to reduce search delays.
 
-By default, the frontend is available at `http://localhost:7860`. The port can be changed in the Dockerfile (make sure to map the port when starting up the container as well)
+By default, the frontend is available on the host machine at `http://localhost:7860`. The port can be changed by [modifying the run command](https://docs.docker.com/network/#published-ports) when starting up the container.
 
 ### Unit tests
 
