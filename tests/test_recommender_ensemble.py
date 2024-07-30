@@ -27,8 +27,8 @@ class TestRecommenderEnsemble(unittest.TestCase):
     game_4_vector = np.array([-0.2, 1.0])
 
     # Importing patched versions within the test to prevent initializing the DB modules
-    @patch('src.recommender_ensemble.vectordb_manager')
-    @patch('src.recommender_ensemble.sqlite_manager')
+    @patch('recommender_ensemble.vectordb_manager')
+    @patch('recommender_ensemble.sqlite_manager')
     def test_get_ensemble_similar_games_by_game(self, mock_sqlite_manager, mock_vectordb_manager):
         mock_vectordb_instance = MagicMock()
         mock_sqlite_instance = MagicMock()
@@ -87,7 +87,7 @@ class TestRecommenderEnsemble(unittest.TestCase):
         mock_sqlite_manager.get_games_by_app_ids.return_value = [found_game_1, found_game_2, found_game_3, found_game_4]
         mock_sqlite_manager.get_games_by_app_id.return_value = [found_game_1]
 
-        from src.recommender_ensemble import get_ensemble_similar_games_by_game
+        from recommender_ensemble import get_ensemble_similar_games_by_game
         recommendation_results = get_ensemble_similar_games_by_game(searched_game, number_results, 0.5, 1.0, 1.0)
 
         # Check that all results are used
