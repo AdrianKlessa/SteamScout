@@ -24,7 +24,7 @@ The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) fo
 1. Clone this repository
 2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.csv` inside `data/raw`
 3. Run `docker_build.bat` (or type `docker build -t steam-scout .` in the terminal)
-4. Run `docker_run.bat` (or type `docker run -p 7860:7860 steam-scout` in the terminal)
+4. Run `docker_run.bat` (or type `docker run --rm -p 7860:7860 steam-scout ` in the terminal)
 
 Building the app will take a while (possibly 15+ minutes) since it's preprocessing the dataset and training doc2vec on it.
 
