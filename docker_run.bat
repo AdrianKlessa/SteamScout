@@ -1,1 +1,1 @@
-docker run -p 7860:7860 steam-scout
+docker run --rm -p 7860:7860 steam-scout 
