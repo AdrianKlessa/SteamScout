@@ -22,7 +22,7 @@ The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) fo
 ### Build & installation (Docker)
 
 1. Clone this repository
-2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.csv` inside `data/raw`
+2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.json` inside `data/raw`
 3. Run `docker_build.bat` (or type `docker build -t steam-scout .` in the terminal)
 4. Run `docker_run.bat` (or type `docker run --rm -p 7860:7860 steam-scout ` in the terminal)
 
