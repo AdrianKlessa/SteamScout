@@ -1,6 +1,5 @@
 from pathlib import Path
 from typing import Iterable
-import json
 import pandas as pd
 import string
 from gensim.utils import simple_preprocess
@@ -10,7 +9,6 @@ import numpy as np
 
 data_dir = Path(__file__).resolve().parents[2] / "data"
 model_path = str(Path(__file__).resolve().parents[2] / "models" / "doc2vec_trained")
-tags_json_path = Path(__file__).resolve().parents[2] / "notebooks" / "tag_dictionary.json"
 csv_path = data_dir / "raw" / "games.csv"
 pickle_path = data_dir / "processed" / "games_with_vectors.pickle"
 
@@ -66,9 +64,17 @@ def str_tags_to_set(tags: str) -> Iterable[str]:
     return set(tags.split(","))
 
 
-with open(tags_json_path, "r", encoding="utf-8") as f:
-    tag_dict = json.load(f)
+tagged_games = df[df["Tags"].notnull()].copy()
+tagged_games["Tags_set"] = tagged_games["Tags"].apply(lambda x: str_tags_to_set(x))
+tags_set_list = tagged_games["Tags_set"].tolist()
 
+tags_collection = set()
+
+for i in tags_set_list:
+    tags_collection.update(i)
+tag_dict = dict()
+for i, el in enumerate(tags_collection):
+    tag_dict[el] = i
 
 def vectorize_str_tags(tags: str):
     vec = np.zeros(448)
