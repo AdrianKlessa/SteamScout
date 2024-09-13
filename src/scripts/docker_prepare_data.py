@@ -76,8 +76,10 @@ tag_dict = dict()
 for i, el in enumerate(tags_collection):
     tag_dict[el] = i
 
+tag_dict_len = len(tag_dict)
+
 def vectorize_str_tags(tags: str):
-    vec = np.zeros(448)
+    vec = np.zeros(tag_dict_len)
     if tags.lower() == "nan":
         return vec
     tags_set = str_tags_to_set(tags)
