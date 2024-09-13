@@ -10,9 +10,35 @@ import numpy as np
 data_dir = Path(__file__).resolve().parents[2] / "data"
 model_path = str(Path(__file__).resolve().parents[2] / "models" / "doc2vec_trained")
 csv_path = data_dir / "raw" / "games.csv"
+json_path = data_dir / "raw" / "games.json"
 pickle_path = data_dir / "processed" / "games_with_vectors.pickle"
 
-df = pd.read_csv(csv_path)
+def convert_tags_from_dict(tags_dict):
+    if len(tags_dict) == 0:
+        return np.NaN
+    key_list = list(tags_dict.keys())
+    keys_string = ",".join(key_list)
+    return keys_string
+
+def read_json_dataset():
+    _df = pd.read_json(json_path)
+    _df = _df.T
+    _df['AppID'] = _df.index
+    _df.rename(columns={'name': 'Name', 'about_the_game': "About the game", "tags": "Tags", "positive": "Positive",
+                        "negative": "Negative", "supported_languages": "Supported languages"}, inplace=True)
+
+    # Workaround for compatibility with json dataset
+    if isinstance(_df["Tags"].iloc[0], list):
+        _df["Tags"] = _df["Tags"].apply(lambda tags: ",".join(tags))
+    if isinstance(_df["Tags"].iloc[0], dict):
+        _df["Tags"] = _df["Tags"].apply(lambda tags: convert_tags_from_dict(tags))
+    if isinstance(_df["Supported languages"].iloc[0], list):
+        _df["Supported languages"] = _df["Supported languages"].apply(lambda languages: ",".join(languages))  # ditto
+    return _df
+
+
+#df = pd.read_csv(csv_path)
+df = read_json_dataset()
 
 df.dropna(subset=['Name', 'About the game'], how='any', inplace=True)
 english_descriptions = df[df['Supported languages'].str.contains("English")]
@@ -42,7 +68,7 @@ model.train(train_corpus, total_examples=model.corpus_count,
             epochs=model.epochs)  # Longer training than default because the dataset isn't large
 
 # Adding vectors
-df = pd.read_csv(csv_path)
+df = read_json_dataset()
 model.save(model_path)
 
 doc2vec_model = model
@@ -78,6 +104,7 @@ for i, el in enumerate(tags_collection):
 
 tag_dict_len = len(tag_dict)
 
+
 def vectorize_str_tags(tags: str):
     vec = np.zeros(tag_dict_len)
     if tags.lower() == "nan":
@@ -86,6 +113,7 @@ def vectorize_str_tags(tags: str):
     for tag in tags_set:
         vec[tag_dict[tag]] = 1
     return vec
+
 
 df["About the game"] = df["About the game"].astype(str)
 df["Tags"] = df["Tags"].astype(str)
