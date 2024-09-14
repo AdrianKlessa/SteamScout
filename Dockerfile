@@ -5,9 +5,9 @@ RUN pip install -r /steam_scout/requirements.txt
 FROM base AS build
 COPY . /steam_scout
 WORKDIR /steam_scout
-RUN python -m src.scripts.docker_prepare_data && rm /steam_scout/data/raw/games.csv
+RUN python -m src.scripts.docker_prepare_data && rm -f /steam_scout/data/raw/games.csv && rm -f /steam_scout/data/raw/games.json
 RUN python -m src.scripts.sqlite_import
-RUN python -m src.scripts.vectordb_import  && rm /steam_scout/data/processed/games_with_vectors.pickle
+RUN python -m src.scripts.vectordb_import  && rm -f /steam_scout/data/processed/games_with_vectors.pickle
 RUN python -m src.scripts.sqlite_add_fts
 
 FROM base AS final
