@@ -2,6 +2,14 @@
 
 ***Find similar games to the ones you like - even if the genres you like are not very popular***
 
+### Gradio version
+
+Due to the old version of Gradio used in this project / branch, do not create public links (by modifying the gradio file) when using it as it is not secure.
+
+By default the app is only available from the local network.
+
+New versions of this application will use Flask backend and React frontend instead.
+
 ![image](docs/screenshot_light.PNG)
 
 The system is a weighted ensemble recommender composed of:
