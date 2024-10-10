@@ -39,6 +39,14 @@ class RecommendationResult:
                 "{:.2f}".format(self.tags_similarity*100),
                 "{:.2f}".format(self.review_score*100)
                 ]
+    def serialize(self):
+        return {"game_name": self.game.game_name,
+            "app_id": self.game.app_id,
+            "game_description": self.game.description,
+            "overall_score": str(self.overall_score),
+            "description_similarity": str(self.description_similarity),
+            "tags_similarity": str(self.tags_similarity),
+            "review_score": str(self.review_score)}
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
