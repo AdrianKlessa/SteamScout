@@ -19,10 +19,10 @@ def game_search(text):
     :param text: Title to search for
     :return: List of (game title, app_id) that were found matching the query
     """
-    found_games = [(game.game_name, game.app_id) for game in sqlite_manager.get_games_fts(text, 20)]
+    found_games = [{"game_name": game.game_name, "app_id": game.app_id} for game in sqlite_manager.get_games_fts(text, 20)]
     exact_find = sqlite_manager.get_games_by_name(text, exact=True)
     if len(exact_find) > 0 and exact_find[0].game_name not in found_games:
-        found_games.insert(0, (exact_find[0].game_name, exact_find[0].app_id))
+        found_games.insert(0, {"game_name": exact_find[0].game_name, "app_id": exact_find[0].app_id})
     return found_games
 
 def find_similar_games(app_id : int, exclude_tag : str, include_tag :str, adult_content_filter : bool, max_reviews : int) -> Sequence[RecommendationResult]:
