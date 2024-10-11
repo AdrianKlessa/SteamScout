@@ -5,6 +5,7 @@ RUN pip install -r /steam_scout/requirements.txt
 FROM base AS build
 COPY . /steam_scout
 WORKDIR /steam_scout
+RUN rm -rf frontend
 RUN python -m src.scripts.docker_prepare_data && rm -f /steam_scout/data/raw/games.csv && rm -f /steam_scout/data/raw/games.json
 RUN python -m src.scripts.sqlite_import
 RUN python -m src.scripts.vectordb_import  && rm -f /steam_scout/data/processed/games_with_vectors.pickle

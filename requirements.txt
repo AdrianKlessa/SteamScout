@@ -6,3 +6,4 @@ docarray==0.40.0
 vectordb==0.0.21
 httpx==0.24.1
 flask==2.2.2
+gunicorn==23.0.0
