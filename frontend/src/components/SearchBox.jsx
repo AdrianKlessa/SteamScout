@@ -8,8 +8,7 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
     const [inputValue, setInputValue] = useState("");
     const [inputSave, setSave] = useState("");
 
-    const backend_port = import.meta.env.VITE_FLASK_PORT
-    const backend_name_url = `http://127.0.0.1:${backend_port}/get-games-by-name`
+    const backend_name_url = "http://127.0.0.1:5174/get-games-by-name"
 
     // Fetch the games based on the input value
     async function getGamesByName(inputValue) {

@@ -3,8 +3,8 @@ import {useEffect, useState} from "react";
 
 export default function Gamelist({selectedGame, foundGames, includeTag, excludeTag, filterAdultContent}){
     const [recGameInformation, setRecGameInformation] = useState([])
-    const backend_port = import.meta.env.VITE_FLASK_PORT
-    const backend_similarity_url = `http://127.0.0.1:${backend_port}/get-games-by-similarity`
+
+    const backend_similarity_url = "http://127.0.0.1:5174/get-games-by-similarity"
     useEffect(()=>{
         if (selectedGame?.value){
             console.log(selectedGame);
