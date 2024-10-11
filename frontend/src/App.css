@@ -1,0 +1,76 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+}
+/*
+Buttons, links, primary elements:
+
+#f7df40 #fae25a
+#fce671 #fee987
+#ffed9b #fff0af
+
+Surface colors (backgrounds, cards etc)
+
+#121212 #282828
+#3f3f3f #575757
+#717171 #8b8b8b
+*/
+
+main{
+  margin: 0 auto;
+  display: flex;
+}
+
+.navbar_top {
+  top: 0;
+  text-align: center;
+  height: auto;
+  display: inline;
+  margin: auto;
+  width: 1em;
+  place-content: center;
+}
+
+.navbar_item {
+  display: inline-block;
+  list-style: none;
+  align-items: center;
+  margin: 1.5em;
+  padding: 0.5em;
+  width: auto;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #fff0af;
+  color: #121212;
+  border-radius: 0.5em;
+}
+
+.navbar_item:hover {
+  background-color: #f7df40;
+}
+
+.navbar_logo {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  filter: invert(80%) sepia(98%) saturate(364%) hue-rotate(343deg) brightness(96%) contrast(101%);
+  /*
+  https://stackoverflow.com/a/53336754
+  https://codepen.io/sosuke/pen/Pjoqqp
+  */
+}
+
+.logo{
+  text-align: center;
+  font-size: 2rem;
+}
+
+.logo_text{
+  display: block;
+}
+
+.searchbox{
+  color: #121212;
+}
