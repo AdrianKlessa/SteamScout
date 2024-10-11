@@ -17,14 +17,11 @@ The tags are binary vectors (consisting of 1s at the indices matching a particul
 
 The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) for easy Approximate Nearest Neighbor search.
 
-[Gradio](https://github.com/gradio-app/gradio) is used to generate a frontend for the system.
-
 ### Build & installation (Docker)
 
 1. Clone this repository
 2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.json` inside `data/raw`
-3. Run `docker_build.bat` (or type `docker build -t steam-scout .` in the terminal)
-4. Run `docker_run.bat` (or type `docker run --rm -p 7860:7860 steam-scout ` in the terminal)
+3. Run `docker compose up` from the repo's directory.
 
 Building the app will take a while (possibly 15+ minutes) since it's preprocessing the dataset and training doc2vec on it.
 
@@ -34,7 +31,7 @@ Running the app after it has been built uses the generated model and DBs so it s
 
 Due to heavy reliance on a local database, the app greatly benefits from using an SSD. Full Text Search and indexing on queried columns is used to reduce search delays.
 
-By default, the frontend is available on the host machine at `http://localhost:7860`. The port can be changed by [modifying the run command](https://docs.docker.com/network/#published-ports) when starting up the container.
+By default, the frontend is available on the host machine at `http://localhost:5173`
 
 ### Unit tests
 
