@@ -2,12 +2,14 @@ services:
   flask_backend:
     build: .
     environment:
-      VITE_FLASK_PORT: 5174
+      FLASK_PORT: 5174
       NGINX_PORT: 5173
     ports:
-      - "8000:5000"
+      - "5174:5174"
   vite_frontend:
-    build: frontend
+    build: ./frontend
     environment:
       VITE_FLASK_PORT: 5174
       NGINX_PORT: 5173
+    ports:
+      - "5173:5173"
