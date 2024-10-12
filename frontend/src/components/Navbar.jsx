@@ -5,10 +5,10 @@ export default function Navbar({navbarLogo}){
     return(
         <div className="navbar_top">
             <Logo navbarLogo={navbarLogo}></Logo>
-            <NavbarButton button_text="Game Search"></NavbarButton>
-            <NavbarButton button_text="About"></NavbarButton>
-            <NavbarButton button_text="Github repo"></NavbarButton>
-            <NavbarButton button_text="Resources used"></NavbarButton>
+            <NavbarButton button_text="Game Search" path="/"></NavbarButton>
+            <NavbarButton button_text="About" path="/about"></NavbarButton>
+            <NavbarButton button_text="Github repo" path="/github"></NavbarButton>
+            <NavbarButton button_text="Resources used" path="/resources"></NavbarButton>
         </div>
     )
 }
