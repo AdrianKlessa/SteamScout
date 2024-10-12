@@ -46,7 +46,8 @@ class RecommendationResult:
             "overall_score": str(self.overall_score),
             "description_similarity": str(self.description_similarity),
             "tags_similarity": str(self.tags_similarity),
-            "review_score": str(self.review_score)}
+            "review_score": str(self.review_score),
+            "tags": str(self.game.tags)}
 
 def cosine_similarity(A, B):
     all_zeros = not (np.any(A) and np.any(B))
