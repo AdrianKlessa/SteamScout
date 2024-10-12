@@ -176,3 +176,10 @@ main{
   text-align: left;
   font-weight: bold;
 }
+
+.filters_span{
+  display: inline-block;
+  width: 6em;
+  margin-right: 0.5em;
+  font-size: 1.25em;
+}

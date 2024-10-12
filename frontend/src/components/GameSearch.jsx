@@ -1,6 +1,5 @@
 import Searchbox from "./SearchBox.jsx";
 import Gamelist from "./Gamelist.jsx";
-import Button from "./Button.jsx";
 import {useState} from "react";
 
 export default function GameSearch() {
@@ -10,14 +9,6 @@ export default function GameSearch() {
     const [excludeTag, setExcludeTag] = useState("");
     const [filterAdultContent, setFilterAdultContent] = useState(false);
 
-    function handleTyping(){
-
-    }
-
-    function handleSelect(){
-
-    }
-
     return (
         <div>
             {selectedGame &&
@@ -25,6 +16,7 @@ export default function GameSearch() {
             }
             <Searchbox gameList={gameList} selectedGame={selectedGame} setSelectedGame={setSelectedGame}
                        setGameList={setGameList}></Searchbox>
+            <span className="filters_span">Additional filters:</span>
             <label className="search_label">
                 <input
                     type="checkbox"
@@ -32,7 +24,7 @@ export default function GameSearch() {
                     onChange={e => setFilterAdultContent(e.target.checked)}
                     className="search_input_checkbox"
                 />
-                Filter Adult Content?
+                Filter adult Content
             </label>
             <label className="search_label">
                 <input
@@ -40,6 +32,7 @@ export default function GameSearch() {
                     value={includeTag}
                     onChange={e => setIncludeTag(e.target.value)}
                     className="search_input_text"
+                    placeholder="e.g. racing"
                 />
                 Includes tag
             </label>
@@ -49,8 +42,9 @@ export default function GameSearch() {
                     checked={excludeTag}
                     onChange={e => setExcludeTag(e.target.value)}
                     className="search_input_text"
+                    placeholder="e.g. FPS"
                 />
-                Excludes tag
+                Exclude tag
             </label>
 
 
