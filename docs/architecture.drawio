@@ -1,0 +1,111 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0" version="24.7.6">
+  <diagram name="Page-1" id="4TfVuDzqESnog-V99Zkw">
+    <mxGraphModel dx="2074" dy="1112" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vfah9zvVQqgifwAgWWXg-37" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="960" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-35" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="960" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-1" target="vfah9zvVQqgifwAgWWXg-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-1" value="&lt;div&gt;Game descriptions (About the game)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="375" y="390" as="sourcePoint" />
+            <mxPoint x="375" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-2" value="Game tags" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-3" target="vfah9zvVQqgifwAgWWXg-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-3" value="&lt;div&gt;Description&lt;/div&gt;&lt;div&gt;vectordb&lt;br&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="105" y="570" width="70" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-4" value="Gensim&#39;s Doc2Vec" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-8" value="Binary encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-10" value="Vectorize" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="290" y="408" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-11" value="Vectorize" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="408" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-14" value="&lt;div&gt;Tags&lt;/div&gt;&lt;div&gt;vectordb&lt;br&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="340" y="570" width="70" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-15" value="General game info (appID, names, user scores)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-16" value="SQLite" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="515" y="570" width="70" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-15" target="vfah9zvVQqgifwAgWWXg-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-4" target="vfah9zvVQqgifwAgWWXg-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="vfah9zvVQqgifwAgWWXg-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="375" y="520" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-22" value="Recommender ensemble" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="810" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.667;entryY=-0.017;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-14" target="vfah9zvVQqgifwAgWWXg-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-25" value="&lt;div&gt;Find closest vectors to&amp;nbsp;&lt;/div&gt;&lt;div&gt;queried game&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="703" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-26" value="&lt;div&gt;Description score: cosine similarity&lt;/div&gt;&lt;div&gt;Tags score: cosine similarity&lt;/div&gt;&lt;div&gt;Review score: percent of positive reviews&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="880" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.008;entryY=0.133;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-16" target="vfah9zvVQqgifwAgWWXg-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-28" value="&lt;div&gt;Get review scores for games found&lt;/div&gt;&lt;div&gt;&amp;nbsp;with tags &amp;amp; description&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="460" y="703" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-29" value="Sort by overall score: weighted sum of the above" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="940" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-30" value="Flask (API)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="960" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.617;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-22" target="vfah9zvVQqgifwAgWWXg-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-32" value="&lt;div&gt;Vite + React&lt;/div&gt;&lt;div&gt;(Frontend)&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="960" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-34" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="vfah9zvVQqgifwAgWWXg-30" target="vfah9zvVQqgifwAgWWXg-32">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="515" y="1010" as="sourcePoint" />
+            <mxPoint x="565" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-36" value="Gunicorn" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="420" y="1020" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vfah9zvVQqgifwAgWWXg-38" value="Nginx" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1020" width="50" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
