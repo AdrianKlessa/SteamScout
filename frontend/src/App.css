@@ -74,3 +74,97 @@ main{
 .searchbox{
   color: #121212;
 }
+
+.game_result_list_element{
+  list-style-type: none;
+}
+
+.game_result_title{
+  font-weight: bold;
+  color: #fff0af;
+  background-color: #8b8b8b;
+  border-radius: 0.5em;
+  padding: 0.25em;
+}
+
+.game_result{
+  display: flex;
+  background-color: #575757;
+  margin: 2em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  font-size: 2em;
+}
+
+.game_result > * {
+  font-size: 0.75em;
+}
+
+.game_result ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.game_result a {
+  display: flex;
+  font-size: 1em;
+  text-decoration: none;
+  color: black;
+}
+
+.game_result_main{
+  display: block;
+}
+
+.game_result_tags{
+  font-size: 0.5em;
+  display: block;
+  margin-left: 2em;
+}
+
+.game_result_tags ul{
+  -ms-column-count: 4;
+  -o-column-count: 4;
+  -moz-column-count: 4;
+  -khtml-column-count: 4;
+  column-count: 4;
+}
+
+.result_explanation{
+  display: flex;
+  margin-top: 2em;
+  font-size: 1.5em;
+  text-align: center;
+  width: auto;
+}
+
+.search_input{
+  margin-right: 2em;
+  margin-left: 2em;
+}
+
+.search_input_text {
+  display: inline-block;
+  width: 6em;
+  position: relative;
+  top: -3em;
+}
+
+.search_label {
+  display: inline-block;
+  width: 6em;
+  margin-right: 0.25em;
+  padding-top: 3em;
+}
+
+.search_input_checkbox {
+  display: inline-block;
+  width: 6em;
+  position: relative;
+  top: -1em;
+}
+
+.game_result_tags > span {
+  text-align: left;
+  font-weight: bold;
+}
