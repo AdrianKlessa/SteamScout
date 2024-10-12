@@ -56,10 +56,18 @@ main{
   width: 3em;
   height: 3em;
   filter: invert(80%) sepia(98%) saturate(364%) hue-rotate(343deg) brightness(96%) contrast(101%);
+  transition-duration: 0.8s;
+  transition-property: transform;
+  overflow: hidden;
   /*
   https://stackoverflow.com/a/53336754
   https://codepen.io/sosuke/pen/Pjoqqp
   */
+}
+
+.navbar_logo:hover {
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
 }
 
 .logo{
@@ -82,14 +90,14 @@ main{
 .game_result_title{
   font-weight: bold;
   color: #fff0af;
-  background-color: #8b8b8b;
+  background-color: #282828;
   border-radius: 0.5em;
   padding: 0.25em;
 }
 
 .game_result{
   display: flex;
-  background-color: #575757;
+  background-color: #282828;
   margin: 2em;
   padding: 0.5em;
   border-radius: 0.5em;
@@ -109,7 +117,7 @@ main{
   display: flex;
   font-size: 1em;
   text-decoration: none;
-  color: black;
+  color: #f7df40;
 }
 
 .game_result_main{

@@ -26,7 +26,7 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
 
     },[selectedGame, includeTag, excludeTag, filterAdultContent])
 
-    if (recGameInformation){
+    if (selectedGame){
         const listItems = recGameInformation.map(game =>
             <li key={game.app_id} className="game_result_list_element">
                 <GameResult game={game}/>
@@ -34,7 +34,7 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
         );
 
         return (
-            <> <span className="result_explanation">Games similar to {selectedGame.label}:</span>
+            <> <span className="result_explanation">Games similar to {selectedGame?.label}:</span>
             <ul>{listItems}</ul>
             </>
         );
