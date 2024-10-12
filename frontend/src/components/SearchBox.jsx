@@ -1,4 +1,3 @@
-//import Async, { useAsync } from 'react-select/async';
 import AsyncSelect from 'react-select/async';
 import {useState} from "react";
 import axios from "axios";

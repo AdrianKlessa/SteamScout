@@ -8,7 +8,6 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
     const backend_similarity_url = "http://127.0.0.1:5174/get-games-by-similarity"
     useEffect(()=>{
         if (selectedGame?.value){
-            console.log(selectedGame);
             const fetchData = async () => {
                 const response = await axios.get(backend_similarity_url, {
                     params: { app_id: selectedGame?.value,
@@ -28,8 +27,6 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
     },[selectedGame, includeTag, excludeTag, filterAdultContent])
 
     if (recGameInformation){
-        console.log("HERE!")
-        console.log(recGameInformation)
         const listItems = recGameInformation.map(game =>
             <li key={game.app_id} className="game_result_list_element">
                 <GameResult game={game}/>
