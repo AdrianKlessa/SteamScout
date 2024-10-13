@@ -24,7 +24,7 @@ export default function GameSearch() {
                     onChange={e => setFilterAdultContent(e.target.checked)}
                     className="search_input_checkbox"
                 />
-                Filter adult Content
+                Filter adult content
             </label>
             <label className="search_label">
                 <input
