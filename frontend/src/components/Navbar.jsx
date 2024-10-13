@@ -7,8 +7,8 @@ export default function Navbar({navbarLogo}){
             <Logo navbarLogo={navbarLogo}></Logo>
             <NavbarButton button_text="Game Search" path="/"></NavbarButton>
             <NavbarButton button_text="About" path="/about"></NavbarButton>
-            <NavbarButton button_text="Github repo" path="/github"></NavbarButton>
-            <NavbarButton button_text="Resources used" path="/resources"></NavbarButton>
+            <NavbarButton button_text="Technologies used" path="/resources"></NavbarButton>
+            <ul className="navbar_item"><a href="https://github.com/AdrianKlessa/SteamScout">Github repo</a></ul>
         </div>
     )
 }

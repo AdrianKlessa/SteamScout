@@ -183,3 +183,13 @@ main{
   margin-right: 0.5em;
   font-size: 1.25em;
 }
+
+.inline_link{
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.inline_link:visited{
+  color: white;
+}

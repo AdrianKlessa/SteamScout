@@ -16,7 +16,6 @@ function App() {
               <Routes>
                   <Route path="/" element={<GameSearch/>}/>
                   <Route path="/about" element={<About/>}/>
-                  <Route path="/github" element={<Github/>}/>
                   <Route path="/resources" element={<Resources/>}/>
               </Routes>
 
