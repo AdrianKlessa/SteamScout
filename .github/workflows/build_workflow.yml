@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use testing dataset
-        run: mv data/raw/tesing_dataset.json data/raw/games.json
+        run: mv data/raw/testing_dataset.json data/raw/games.json
       - name: Docker-compose
         run: docker-compose build
