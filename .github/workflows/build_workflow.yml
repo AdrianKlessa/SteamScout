@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
+      - uses: actions/checkout@v2
       - name: Use testing dataset
         run: mv data/raw/tesing_dataset.json data/raw/games.json
       - name: Docker-compose
