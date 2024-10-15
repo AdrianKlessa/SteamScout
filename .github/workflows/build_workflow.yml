@@ -1,0 +1,17 @@
+name: docker-compose build
+on:
+  workflow_run:
+    workflows: ["Unit tests"]
+    branches: [master]
+    types:
+      - completed
+      - requested
+jobs:
+  docker-compose-build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Use testing dataset
+        run: mv data/raw/tesing_dataset.json data/raw/games.json
+      - name: Docker-compose
+        run: docker-compose build

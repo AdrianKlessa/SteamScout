@@ -1,4 +1,6 @@
 ### A similarity search and recommendation system for finding games on Steam
+![Test workflow](https://github.com/AdrianKlessa/SteamScout/actions/workflows/test_workflow.yml/badge.svg)
+![Docker compose](https://github.com/AdrianKlessa/SteamScout/actions/workflows/build_workflow.yml/badge.svg)
 
 ***Find similar games to the ones you like - even if the genres you like are not very popular***
 
