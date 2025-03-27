@@ -89,8 +89,8 @@ def create_user_table():
     create_statement = """
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username text,
-        password_hash text,
+        username text NOT NULL UNIQUE,
+        password_hash text NOT NULL,
     );"""
     # create a database connection
     try:
