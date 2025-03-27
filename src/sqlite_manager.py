@@ -114,7 +114,7 @@ def results_to_games(result_list):
 
 def get_user_by_username(username: str)->Union[User,None]:
     parameter = username
-    statement = f"SELECT t1.user_id, t1.username, t1.password_hash FROM users WHERE username=?"
+    statement = f"SELECT u.user_id, u.username, u.password_hash FROM users u WHERE username=?"
     try:
         with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
             cursor = conn.cursor()
