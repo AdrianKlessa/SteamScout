@@ -2,7 +2,7 @@ from pathlib import Path
 import sqlite3
 import io
 from typing import Sequence
-
+from User import User
 import numpy as np
 
 from Game import Game
@@ -111,3 +111,20 @@ def results_to_games(result_list):
     for i in result_list:
         results.append(Game(*i))
     return results
+
+def get_user_by_username(username: str)->User | None:
+    parameter = username
+    statement = f"SELECT t1.user_id, t1.username, t1.password_hash FROM users WHERE username=?"
+    try:
+        with sqlite3.connect(SQLITE_PATH, detect_types=sqlite3.PARSE_DECLTYPES) as conn:
+            cursor = conn.cursor()
+            cursor.execute(statement, [parameter])
+            res = cursor.fetchall()
+            if len(res) == 0:
+                return None
+            return User(*res[0])
+    except sqlite3.Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
