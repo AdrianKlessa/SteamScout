@@ -1,4 +1,3 @@
-import argon2
 import pandas as pd
 from pathlib import Path
 from argon2 import PasswordHasher
@@ -90,7 +89,7 @@ def create_user_table():
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
         username text NOT NULL UNIQUE,
-        password_hash text NOT NULL,
+        password_hash text NOT NULL
     );"""
     # create a database connection
     try:
@@ -208,3 +207,5 @@ if __name__ == '__main__':
     create_game_table()
     add_index()
     insert_data()
+    create_user_table()
+    add_users()
