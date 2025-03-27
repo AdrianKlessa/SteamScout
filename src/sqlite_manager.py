@@ -1,7 +1,7 @@
 from pathlib import Path
 import sqlite3
 import io
-from typing import Sequence
+from typing import Sequence, Union
 from User import User
 import numpy as np
 
@@ -112,7 +112,7 @@ def results_to_games(result_list):
         results.append(Game(*i))
     return results
 
-def get_user_by_username(username: str)->User | None:
+def get_user_by_username(username: str)->Union[User,None]:
     parameter = username
     statement = f"SELECT t1.user_id, t1.username, t1.password_hash FROM users WHERE username=?"
     try:
