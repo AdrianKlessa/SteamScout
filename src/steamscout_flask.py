@@ -7,17 +7,13 @@ import search_manager
 import os
 from sqlite_manager import get_user_by_username
 from argon2 import PasswordHasher
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 JWT_SECRET = os.getenv('JWT_SECRET')
 jwt_app_name = 'steam-scout-backend'
 ph = PasswordHasher()
-
-def _build_cors_preflight_response():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Headers", "*")
-    response.headers.add("Access-Control-Allow-Methods", "*")
-    return response
 
 def verify_user(username: str, password: str)->bool:
     actual_user = get_user_by_username(username)
@@ -50,17 +46,10 @@ def token_required(func):
 
     return decorated
 
-@app.after_request
-def after_request_cors(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
 
-
-@app.route('/get-games-by-name', methods=['GET', 'OPTIONS'])
+@app.route('/get-games-by-name', methods=['GET'])
 @token_required
 def find_games_by_name():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_preflight_response()
     game_name = request.args.get('game_name')
     if not game_name:
         abort(400)
@@ -68,11 +57,9 @@ def find_games_by_name():
     response = jsonify(results)
     return response
 
-@app.route('/get-games-by-similarity', methods=['GET', 'OPTIONS'])
+@app.route('/get-games-by-similarity', methods=['GET'])
 @token_required
 def find_similar_games():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_preflight_response()
     game_name = request.args.get('game_name')
     app_id = request.args.get("app_id")
     if not app_id:
@@ -89,10 +76,8 @@ def find_similar_games():
     response = jsonify([x.serialize() for x in results])
     return response
 
-@app.route('/login', methods=['POST', 'OPTIONS'])
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == "OPTIONS":
-        return _build_cors_preflight_response()
     username = request.json.get('username')
     password = request.json.get('password')
     if not username or not password:
