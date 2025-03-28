@@ -1,5 +1,5 @@
 from functools import wraps
-
+from datetime import datetime, timezone, timedelta
 import argon2.exceptions
 import jwt
 from flask import Flask, request, jsonify, abort, make_response
@@ -10,6 +10,7 @@ from argon2 import PasswordHasher
 
 app = Flask(__name__)
 JWT_SECRET = os.getenv('JWT_SECRET')
+jwt_app_name = 'steam-scout-backend'
 ph = PasswordHasher()
 
 def _build_cors_preflight_response():
@@ -36,12 +37,14 @@ def token_required(func):
         if auth_header and len(auth_header.split()) == 2:
             token = auth_header.split()[1]
         if not token:
-            return jsonify({'message': 'A JWT token is required to view this'}), 401
+            return jsonify({'message': 'A JWT is required to view this'}), 401
         try:
-            data = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
-        except Exception as e:
-            print(e)
-            return jsonify({'message': 'Invalid JWT token'}), 403
+            data = jwt.decode(token, JWT_SECRET, algorithms=["HS256"], issuer=jwt_app_name)
+        except jwt.exceptions.ExpiredSignatureError:
+            return jsonify({'message': 'Token has expired'}), 401
+        except jwt.exceptions.InvalidTokenError:
+            return jsonify({'message': 'Invalid JWT'}), 403
+
 
         return func(*args, **kwargs)
 
@@ -96,7 +99,9 @@ def login():
         abort(400)
     if not verify_user(username, password):
         abort(401)
-    encoded = jwt.encode({'username': username}, JWT_SECRET)
+    encoded = jwt.encode({'username': username,
+                          'exp': datetime.now(timezone.utc)+timedelta(hours=1),
+                          'iss': jwt_app_name}, JWT_SECRET)
     return jsonify({'token': encoded})
 
 if __name__ == '__main__':
