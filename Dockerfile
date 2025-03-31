@@ -16,5 +16,4 @@ RUN python -m src.scripts.sqlite_add_fts
 FROM base AS final
 COPY --from=build /steam_scout /steam_scout
 WORKDIR /steam_scout/src
-EXPOSE ${FLASK_PORT}
 CMD  gunicorn -w 1 -b 0.0.0.0:${FLASK_PORT} steamscout_flask:app
