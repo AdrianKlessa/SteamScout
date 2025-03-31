@@ -7,17 +7,29 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
     const [inputValue, setInputValue] = useState("");
     const [inputSave, setSave] = useState("");
 
-    const backend_name_url = "http://127.0.0.1:5174/get-games-by-name"
+    const backend_name_url = "http://127.0.0.1:5174/api/get-games-by-name"
+
+    function getCookie(name) {
+        function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+        var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+        return match ? match[1] : null;
+    }
 
     // Fetch the games based on the input value
     async function getGamesByName(inputValue) {
         if (!inputValue) return [];  // Return empty array if no input
-
+        let jwt_token = getCookie('jwt_token');
+        if (!jwt_token){
+            window.alert("Login is required to use search functionality.")
+        }
         try {
             const response = await axios.get(backend_name_url, {
-                params: { game_name: inputValue }
+                params: { game_name: inputValue },
+                headers: {"Authorization": `Bearer ${jwt_token}`},
             });
-
+            if (response.status===401){
+                window.alert("JWT token is expired; please log in again.")
+            }
             // Convert the response data to options for the dropdown
             return response.data.map(game => ({
                 value: game.app_id,

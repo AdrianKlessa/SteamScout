@@ -9,6 +9,7 @@ export default function Navbar({navbarLogo}){
             <NavbarButton button_text="About" path="/about"></NavbarButton>
             <NavbarButton button_text="Technologies used" path="/resources"></NavbarButton>
             <ul className="navbar_item"><a href="https://github.com/AdrianKlessa/SteamScout">Github repo</a></ul>
+            <NavbarButton button_text="Log in" path="/userlogin">Log in</NavbarButton>
         </div>
     )
 }
