@@ -5,7 +5,7 @@ import GameResult from "./GameResult.jsx";
 export default function Gamelist({selectedGame, foundGames, includeTag, excludeTag, filterAdultContent}){
     const [recGameInformation, setRecGameInformation] = useState([])
 
-    const backend_similarity_url = "http://127.0.0.1:5174/api/get-games-by-similarity"
+    const backend_similarity_url = "http://127.0.0.1:8080/api/get-games-by-similarity"
 
     function getCookie(name) {
         function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }

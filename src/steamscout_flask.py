@@ -47,7 +47,7 @@ def token_required(func):
     return decorated
 
 
-@app.route('/get-games-by-name', methods=['GET'])
+@app.route('/api/get-games-by-name', methods=['GET'])
 @token_required
 def find_games_by_name():
     game_name = request.args.get('game_name')
@@ -57,7 +57,7 @@ def find_games_by_name():
     response = jsonify(results)
     return response
 
-@app.route('/get-games-by-similarity', methods=['GET'])
+@app.route('/api/get-games-by-similarity', methods=['GET'])
 @token_required
 def find_similar_games():
     game_name = request.args.get('game_name')
@@ -76,7 +76,7 @@ def find_similar_games():
     response = jsonify([x.serialize() for x in results])
     return response
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     username = request.json.get('username')
     password = request.json.get('password')

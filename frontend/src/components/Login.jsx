@@ -3,7 +3,7 @@ import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const backend_name_url = "http://127.0.0.1:5000/api/login"
+    const backend_name_url = "http://127.0.0.1:8080/api/login"
     const [note, setNote] = useState("");
     const [typedUsername, setTypedUsername] = useState("");
     const [typedPassword, setTypedPassword] = useState("");

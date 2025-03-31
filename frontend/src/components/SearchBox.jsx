@@ -7,7 +7,7 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
     const [inputValue, setInputValue] = useState("");
     const [inputSave, setSave] = useState("");
 
-    const backend_name_url = "http://127.0.0.1:5174/api/get-games-by-name"
+    const backend_name_url = "http://127.0.0.1:8080/api/get-games-by-name"
 
     function getCookie(name) {
         function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
