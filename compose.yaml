@@ -11,4 +11,4 @@ services:
       VITE_FLASK_PORT: 5174
       NGINX_PORT: 5173
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
