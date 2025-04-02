@@ -14,6 +14,8 @@ RUN python -m src.scripts.vectordb_import  && rm -f /steam_scout/data/processed/
 RUN python -m src.scripts.sqlite_add_fts
 
 FROM base AS final
-COPY --from=build /steam_scout /steam_scout
+RUN useradd -m appuser
+COPY --from=build --chown=appuser:appuser /steam_scout /steam_scout
 WORKDIR /steam_scout/src
+USER appuser
 CMD  gunicorn -w 1 -b 0.0.0.0:${FLASK_PORT} steamscout_flask:app
