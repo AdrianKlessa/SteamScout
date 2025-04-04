@@ -6,6 +6,7 @@ FROM base AS build
 COPY data /steam_scout/data
 COPY models /steam_scout/models
 COPY src /steam_scout/src
+COPY users.json /steam_scout/src/scripts/users.json
 WORKDIR /steam_scout
 RUN python -m src.scripts.docker_prepare_data && rm -f /steam_scout/data/raw/games.csv && rm -f /steam_scout/data/raw/games.json
 RUN python -m src.scripts.sqlite_import
@@ -13,7 +14,8 @@ RUN python -m src.scripts.vectordb_import  && rm -f /steam_scout/data/processed/
 RUN python -m src.scripts.sqlite_add_fts
 
 FROM base AS final
-COPY --from=build /steam_scout /steam_scout
+RUN useradd -m appuser
+COPY --from=build --chown=appuser:appuser /steam_scout /steam_scout
 WORKDIR /steam_scout/src
-EXPOSE ${FLASK_PORT}
+USER appuser
 CMD  gunicorn -w 1 -b 0.0.0.0:${FLASK_PORT} steamscout_flask:app

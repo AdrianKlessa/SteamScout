@@ -10,5 +10,5 @@ RUN npm run build
 FROM nginx:1.27.2-alpine-slim as prod
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY nginx.conf  /etc/nginx/conf.d
-EXPOSE 5173
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

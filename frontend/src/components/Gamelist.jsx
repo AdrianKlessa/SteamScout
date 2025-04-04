@@ -5,18 +5,35 @@ import GameResult from "./GameResult.jsx";
 export default function Gamelist({selectedGame, foundGames, includeTag, excludeTag, filterAdultContent}){
     const [recGameInformation, setRecGameInformation] = useState([])
 
-    const backend_similarity_url = "http://127.0.0.1:5174/get-games-by-similarity"
+    const backend_similarity_url = "http://127.0.0.1:8080/api/get-games-by-similarity"
+
+    function getCookie(name) {
+        function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+        var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+        return match ? match[1] : null;
+    }
+
     useEffect(()=>{
         if (selectedGame?.value){
             const fetchData = async () => {
+
+                let jwt_token = getCookie('jwt_token');
+                if (!jwt_token){
+                    window.alert("Login is required to use search functionality.")
+                }
+
                 const response = await axios.get(backend_similarity_url, {
                     params: { app_id: selectedGame?.value,
                         include_tag: includeTag,
                         exclude_tag: excludeTag,
                         adult_content_filter: filterAdultContent
 
-                    }
+                    },
+                    headers: {"Authorization": `Bearer ${jwt_token}`},
                 })
+                if (response.status===401){
+                    window.alert("JWT token is expired; please log in again.")
+                }
                 setRecGameInformation(response.data);
             }
             fetchData()

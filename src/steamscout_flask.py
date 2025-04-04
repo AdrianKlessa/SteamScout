@@ -1,23 +1,55 @@
+from functools import wraps
+from datetime import datetime, timezone, timedelta
+import argon2.exceptions
+import jwt
 from flask import Flask, request, jsonify, abort, make_response
 import search_manager
+import os
+from sqlite_manager import get_user_by_username
+from argon2 import PasswordHasher
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
+JWT_SECRET = os.getenv('JWT_SECRET')
+jwt_app_name = 'steam-scout-backend'
+ph = PasswordHasher()
 
-def _build_cors_preflight_response():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Headers", "*")
-    response.headers.add("Access-Control-Allow-Methods", "*")
-    return response
+def verify_user(username: str, password: str)->bool:
+    actual_user = get_user_by_username(username)
+    if actual_user is None:
+        return False
+    try:
+        ph.verify(actual_user.password_hash, password)
+        return True
+    except argon2.exceptions.VerifyMismatchError:
+        return False
 
-@app.after_request
-def after_request_cors(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+def token_required(func):
+    @wraps(func)
+    def decorated(*args, **kwargs):
+        token = None
+        auth_header = request.headers.get("Authorization")
+        if auth_header and len(auth_header.split()) == 2:
+            token = auth_header.split()[1]
+        if not token:
+            return jsonify({'message': 'A JWT is required to view this'}), 401
+        try:
+            data = jwt.decode(token, JWT_SECRET, algorithms=["HS256"], issuer=jwt_app_name)
+        except jwt.exceptions.ExpiredSignatureError:
+            return jsonify({'message': 'Token has expired'}), 401
+        except jwt.exceptions.InvalidTokenError:
+            return jsonify({'message': 'Invalid JWT'}), 403
 
-@app.route('/get-games-by-name', methods=['GET', 'OPTIONS'])
+
+        return func(*args, **kwargs)
+
+    return decorated
+
+
+@app.route('/api/get-games-by-name', methods=['GET'])
+@token_required
 def find_games_by_name():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_preflight_response()
     game_name = request.args.get('game_name')
     if not game_name:
         abort(400)
@@ -25,10 +57,9 @@ def find_games_by_name():
     response = jsonify(results)
     return response
 
-@app.route('/get-games-by-similarity', methods=['GET', 'OPTIONS'])
+@app.route('/api/get-games-by-similarity', methods=['GET'])
+@token_required
 def find_similar_games():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_preflight_response()
     game_name = request.args.get('game_name')
     app_id = request.args.get("app_id")
     if not app_id:
@@ -45,6 +76,18 @@ def find_similar_games():
     response = jsonify([x.serialize() for x in results])
     return response
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if not username or not password:
+        abort(400)
+    if not verify_user(username, password):
+        abort(401)
+    encoded = jwt.encode({'username': username,
+                          'exp': datetime.now(timezone.utc)+timedelta(hours=1),
+                          'iss': jwt_app_name}, JWT_SECRET)
+    return jsonify({'token': encoded})
 
 if __name__ == '__main__':
     app.run(debug=True)

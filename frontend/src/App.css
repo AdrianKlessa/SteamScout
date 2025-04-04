@@ -151,6 +151,18 @@ main{
   margin-left: 2em;
 }
 
+.login{
+  display:flex;
+  flex-direction: column;
+}
+
+.login_textfield{
+  float:left;
+  clear:left;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 .search_input_text {
   display: inline-block;
   width: 6em;

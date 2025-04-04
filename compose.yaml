@@ -4,12 +4,11 @@ services:
     environment:
       FLASK_PORT: 5174
       NGINX_PORT: 5173
-    ports:
-      - "5174:5174"
+      JWT_SECRET: ${JWT_SECRET}
   vite_frontend:
     build: ./frontend
     environment:
       VITE_FLASK_PORT: 5174
       NGINX_PORT: 5173
     ports:
-      - "5173:5173"
+      - "127.0.0.1:8080:8080"
