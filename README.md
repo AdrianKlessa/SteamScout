@@ -31,6 +31,7 @@ The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) fo
 }
 ```
 This is a temporary solution to add auth to this application while using file-based SQLite DBs. The file is deleted (in-container) during the build process and doesn't exist in the final image.
+
 4. Run `docker compose up` from the repo's directory.
 
 Building the app will take a while (possibly 15+ minutes) since it's preprocessing the dataset and training doc2vec on it.
