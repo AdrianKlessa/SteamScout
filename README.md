@@ -23,7 +23,15 @@ The vectors are stored using [vectordb](https://github.com/jina-ai/vectordb/) fo
 
 1. Clone this repository
 2. Download the [Steam Games dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) from Kaggle and put `games.json` inside `data/raw`
-3. Run `docker compose up` from the repo's directory.
+3. Modify the `users.json` file to inject temporary user login info (used during build time). E.g.
+```
+{
+"user1": "pass1",
+"user2": "pass2",
+}
+```
+This is a temporary solution to add auth to this application while using file-based SQLite DBs. The file is deleted (in-container) during the build process and doesn't exist in the final image.
+4. Run `docker compose up` from the repo's directory.
 
 Building the app will take a while (possibly 15+ minutes) since it's preprocessing the dataset and training doc2vec on it.
 
@@ -33,7 +41,7 @@ Running the app after it has been built uses the generated model and DBs so it s
 
 Due to heavy reliance on a local database, the app greatly benefits from using an SSD. Full Text Search and indexing on queried columns is used to reduce search delays.
 
-By default, the frontend is available on the host machine at `http://localhost:5173`
+By default, the frontend is available on the host machine at `http://localhost:8080`
 
 ### Unit tests
 
