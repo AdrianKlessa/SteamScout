@@ -1,7 +1,7 @@
 export default function About() {
     return (<div>
-        <h2>What is SteamScout?</h2>
-        SteamScout is a recommendation system that you can use to find similar games to the ones you love.
+        <h2>What is this website?</h2>
+        This web application is a recommendation system that you can use to find similar games to the ones you love.
         You can think about it as a similarity search engine.
         Simply type into the search box the name of one of your favourite games, select it from the dropdown and you'll get results with other Steam games similar to the one you typed in.
         <h2>What data is used to search for great games?</h2>

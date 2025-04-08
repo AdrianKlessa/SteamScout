@@ -1,6 +1,6 @@
 export default function Resources() {
     return (<div>
-        The current iteration of SteamScout is a web application with completely separate frontend and backend.
+        The current iteration of this application has a completely separate frontend and backend.
         Previously, <a href="https://github.com/gradio-app/gradio" className="inline_link">Gradio</a> was used to
         quickly create (a prototype for?) the frontend but a few months later I decided to work on a proper, modern web
         application.
