@@ -3,7 +3,8 @@ import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const backend_name_url = "http://127.0.0.1:8080/api/login"
+    const baseUrl = new URL(document.location.origin);
+    baseUrl.port = document.location.port;
     const [note, setNote] = useState("");
     const [typedUsername, setTypedUsername] = useState("");
     const [typedPassword, setTypedPassword] = useState("");
@@ -14,7 +15,8 @@ export default function Login() {
         if (!username || !password) return;  // Return empty array if no input
 
         try {
-            const response = await axios.post(backend_name_url, {
+            const url = new URL("/api/login", baseUrl).href;
+            const response = await axios.post(url, {
                 username: username,
                 password: password
             });

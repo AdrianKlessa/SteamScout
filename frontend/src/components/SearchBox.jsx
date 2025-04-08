@@ -7,8 +7,8 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
     const [inputValue, setInputValue] = useState("");
     const [inputSave, setSave] = useState("");
 
-    const backend_name_url = "http://127.0.0.1:8080/api/get-games-by-name"
-
+    const baseUrl = new URL(document.location.origin);
+    baseUrl.port = document.location.port;
     function getCookie(name) {
         function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
         var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
@@ -22,8 +22,9 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
         if (!jwt_token){
             window.alert("Login is required to use search functionality.")
         }
+        const url = new URL("/api/get-games-by-name", baseUrl).href;
         try {
-            const response = await axios.get(backend_name_url, {
+            const response = await axios.get(url, {
                 params: { game_name: inputValue },
                 headers: {"Authorization": `Bearer ${jwt_token}`},
             });

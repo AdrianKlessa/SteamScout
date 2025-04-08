@@ -5,8 +5,9 @@ import GameResult from "./GameResult.jsx";
 export default function Gamelist({selectedGame, foundGames, includeTag, excludeTag, filterAdultContent}){
     const [recGameInformation, setRecGameInformation] = useState([])
 
-    const backend_similarity_url = "http://127.0.0.1:8080/api/get-games-by-similarity"
 
+    const baseUrl = new URL(document.location.origin);
+    baseUrl.port = document.location.port;
     function getCookie(name) {
         function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
         var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
@@ -22,7 +23,9 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
                     window.alert("Login is required to use search functionality.")
                 }
 
-                const response = await axios.get(backend_similarity_url, {
+                const url = new URL("/api/get-games-by-similarity", baseUrl).href;
+
+                const response = await axios.get(url, {
                     params: { app_id: selectedGame?.value,
                         include_tag: includeTag,
                         exclude_tag: excludeTag,
