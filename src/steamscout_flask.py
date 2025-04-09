@@ -90,4 +90,4 @@ def login():
     return jsonify({'token': encoded})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
