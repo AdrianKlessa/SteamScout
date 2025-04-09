@@ -113,12 +113,98 @@ main{
   padding-left: 0;
 }
 
-.game_result a {
+.game_result a:link {
   display: flex;
   font-size: 1em;
   text-decoration: none;
   color: #f7df40;
 }
+
+@media (prefers-color-scheme: dark){
+  .game_result a {
+    color: #f7df40;
+  }
+
+  .game_result a:visited {
+    color: #f7df40;
+  }
+
+  .game_result_title{
+    color: #fff0af;
+  }
+
+  .game_result a:link:hover{
+    color: #121212;
+  }
+
+  a:link{
+    color: #121212;
+  }
+
+  a:hover{
+    color: #121212;
+  }
+
+  a:visited{
+    color: #121212;
+  }
+
+
+  .game_result a:hover {
+    color: #f7df40;
+  }
+}
+
+
+@media (prefers-color-scheme: light){
+  .game_result a {
+    color: #F5CB5C;
+  }
+  .navbar_item:hover {
+    background-color: #F5CB5C;
+  }
+  .game_result_title{
+    color: #fff0af;
+    background-color: #333533;
+  }
+  .navbar_item {
+    background-color: #fff0af;
+    color: #121212;
+  }
+  .inline_link{
+    color: white;
+  }
+
+  .inline_link:visited{
+    color: white;
+  }
+
+  a:link{
+    color: #242423;
+  }
+
+  a:hover{
+    color: #242423;
+  }
+
+  a:visited{
+    color: #242423;
+  }
+
+  .game_result a:link{
+    color: #242423;
+  }
+
+  .game_result a:hover {
+    color: #f7df40;
+  }
+
+
+  .game_result{
+    background-color: #CFDBD5;
+  }
+}
+
 
 .game_result_main{
   display: block;
@@ -204,4 +290,8 @@ main{
 
 .inline_link:visited{
   color: white;
+}
+
+a:link{
+  color: #121212;
 }
