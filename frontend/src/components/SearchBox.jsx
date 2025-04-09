@@ -27,10 +27,10 @@ export default function Searchbox({gameList, selectedGame, setSelectedGame, setG
             const response = await axios.get(url, {
                 params: { game_name: inputValue },
                 headers: {"Authorization": `Bearer ${jwt_token}`},
-            });
-            if (response.status===401){
-                window.alert("JWT token is expired; please log in again.")
-            }
+            }).catch((reason)=>{
+                if (reason.response.status===401){
+                    window.alert("JWT token is expired; please log in again.")
+                }});
             // Convert the response data to options for the dropdown
             return response.data.map(game => ({
                 value: game.app_id,

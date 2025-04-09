@@ -33,10 +33,12 @@ export default function Gamelist({selectedGame, foundGames, includeTag, excludeT
 
                     },
                     headers: {"Authorization": `Bearer ${jwt_token}`},
+                }).catch((reason)=>{
+                    if (reason.response.status===401){
+                        window.alert("JWT token is expired; please log in again.")
+                    }
+
                 })
-                if (response.status===401){
-                    window.alert("JWT token is expired; please log in again.")
-                }
                 setRecGameInformation(response.data);
             }
             fetchData()
